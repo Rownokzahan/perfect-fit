@@ -40,20 +40,12 @@ export const adminMenu: AdminMenuType[] = [
     path: "/admin/products",
     subItems: [
       {
-        name: "Products",
-        path: "/admin/products",
-      },
-      {
         name: "Add Product",
         path: "/admin/products/add",
       },
       {
-        name: "Inactive Products",
-        path: "/admin/products/inactive",
-      },
-      {
-        name: "Deleted Products",
-        path: "/admin/products/deleted",
+        name: "All Products",
+        path: "/admin/products",
       },
     ],
   },
@@ -68,3 +60,21 @@ export const adminMenu: AdminMenuType[] = [
     path: "/admin/customers",
   },
 ];
+
+// Helper function to get page name from pathname
+export const getPageNameFromPath = (pathname: string): string => {
+  for (const item of adminMenu) {
+    if (pathname === item.path || pathname.startsWith(item.path + "/")) {
+      // Check sub-items first for exact match
+      if (isGroupItem(item)) {
+        for (const subItem of item.subItems) {
+          if (pathname === subItem.path) {
+            return subItem.name;
+          }
+        }
+      }
+      return item.name;
+    }
+  }
+  return "Dashboard";
+};
