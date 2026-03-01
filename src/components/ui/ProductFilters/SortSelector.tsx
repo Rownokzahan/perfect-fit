@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Dropdown, DropdownItem } from "../Dropdown";
 import useQueryParams from "@/hooks/useQueryParams";
 
@@ -18,26 +18,21 @@ const sortOptions: SORT[] = [
 ];
 
 const SortSelector = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const { queryParams, setQueryParam } = useQueryParams();
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<SORT | null>(sortOptions[0]);
-
-  useEffect(() => {
+  const selected = (() => {
     const sortFromURL = queryParams.get("sort");
-
-    if (!sortFromURL) return;
-
-    const matched = sortOptions.find((option) => option.value === sortFromURL);
-
-    if (matched) {
-      setSelected(matched);
-    }
-  }, [queryParams]);
+    if (!sortFromURL) return sortOptions[0];
+    return (
+      sortOptions.find((option) => option.value === sortFromURL) ??
+      sortOptions[0]
+    );
+  })();
 
   const handleSelect = (sort: SORT) => {
     setQueryParam("sort", sort.value);
-    setSelected(sort);
     setIsOpen(false);
   };
 
