@@ -44,7 +44,7 @@ export const createProduct = requireAdmin(
     ];
 
     for (const v of validators) {
-      if (!v.valid) return { success: false, message: v.message };
+      if (!v.valid) return { error: true, message: v.message };
     }
 
     try {
@@ -72,11 +72,11 @@ export const createProduct = requireAdmin(
         const message = Object.values(err.errors)
           .map((e) => e.message)
           .join(", ");
-        return { success: false, message };
+        return { error: true, message };
       }
 
       console.error(err);
-      return { success: false, message: "Something went wrong." };
+      return { error: true, message: "Something went wrong." };
     }
 
     // Redirect after success

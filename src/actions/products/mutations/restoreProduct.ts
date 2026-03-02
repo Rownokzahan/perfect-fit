@@ -1,3 +1,5 @@
+"use server";
+
 import { connectToDatabase } from "@/lib/db";
 import { requireAdmin } from "@/lib/utils/admin";
 import ProductModel from "@/models/ProductModel";
@@ -15,7 +17,7 @@ export const restoreProduct = requireAdmin(async (productId: Id) => {
 
     if (result.matchedCount === 0) {
       return {
-        success: false,
+        error: true,
         message: "Product not found or not soft-deleted",
       };
     }
@@ -24,6 +26,6 @@ export const restoreProduct = requireAdmin(async (productId: Id) => {
     updateTag("products");
   } catch (err) {
     console.error("Failed to restore product", err);
-    return { success: false, message: "Could not restore product" };
+    return { error: true, message: "Could not restore product" };
   }
 });

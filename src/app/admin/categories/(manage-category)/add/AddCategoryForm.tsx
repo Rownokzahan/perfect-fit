@@ -24,15 +24,15 @@ const AddCategoryForm = () => {
     }
 
     startTransition(async () => {
-      const result = await createCategory({
+      const error = await createCategory({
         name: data.name,
         image,
       });
 
-      if (result.success) {
-        reset();
+      if (error) {
+        toast.error(error.message, { duration: 5000 });
       } else {
-        toast.error(result.message, { duration: 5000 });
+        reset();
       }
     });
   };

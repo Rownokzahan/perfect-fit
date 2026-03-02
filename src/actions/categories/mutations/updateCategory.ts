@@ -30,7 +30,7 @@ export const updateCategory = requireAdmin(
     ];
 
     for (const v of validators) {
-      if (!v.valid) return { success: false, message: v.message };
+      if (!v.valid) return { error: true, message: v.message };
     }
 
     try {
@@ -39,7 +39,7 @@ export const updateCategory = requireAdmin(
       // Fetch the existing category
       const existingCategory = await CategoryModel.findById(categoryId);
       if (!existingCategory) {
-        return { success: false, message: "Category not found" };
+        return { error: true, message: "Category not found" };
       }
 
       // Generate slug only if name changed
@@ -68,7 +68,7 @@ export const updateCategory = requireAdmin(
       updateTag("categories");
     } catch (err) {
       console.error(err);
-      return { success: false, message: "Failed to update category" };
+      return { error: true, message: "Failed to update category" };
     }
 
     // Redirect after success

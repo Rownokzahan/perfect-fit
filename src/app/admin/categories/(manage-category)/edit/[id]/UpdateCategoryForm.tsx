@@ -35,12 +35,12 @@ const UpdateCategoryForm = ({ category }: UpdateCategoryFormProps) => {
     };
 
     startTransition(async () => {
-      const result = await updateCategory(payload);
+      const error = await updateCategory(payload);
 
-      if (result.success) {
-        reset();
+      if (error) {
+        toast.error(error.message, { duration: 5000 });
       } else {
-        toast.error(result.message, { duration: 5000 });
+        reset();
       }
     });
   };

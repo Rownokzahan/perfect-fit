@@ -1,8 +1,9 @@
 import { connectToDatabase } from "@/lib/db";
+import { isCurrentUserAdmin } from "@/lib/utils/admin";
 import { toPlainObject } from "@/lib/utils/object";
 import CategoryModel from "@/models/CategoryModel";
 import ProductModel from "@/models/ProductModel";
-import { PaginatedProducts } from "@/types/product";
+import { PaginatedProducts, ProductStatus } from "@/types/product";
 import { SortOrder } from "mongoose";
 import { cacheTag } from "next/cache";
 
@@ -19,16 +20,21 @@ interface GetProductsProps {
   page?: string | number;
   category?: string;
   sort?: string;
+  status?: ProductStatus;
   limit?: string | number;
 }
 
-export const getProducts = async ({
-  search,
-  page = 1,
-  category: categorySlug,
-  sort = "newest",
-  limit = 20,
-}: GetProductsProps): Promise<PaginatedProducts> => {
+export const getCachedProducts = async (
+  {
+    search,
+    page = 1,
+    category: categorySlug,
+    sort = "newest",
+    status,
+    limit = 20,
+  }: GetProductsProps,
+  isAdmin: boolean,
+): Promise<PaginatedProducts> => {
   "use cache";
   cacheTag("products");
 
@@ -61,14 +67,22 @@ export const getProducts = async ({
       }
     }
 
+    if (!isAdmin) {
+      filters.status = "active"; // ignores user input status
+    } else {
+      if (status) {
+        filters.status = status;
+      }
+    }
+
     const [products, totalItems] = await Promise.all([
-      ProductModel.find({ ...filters, status: "active" })
+      ProductModel.find({ ...filters })
         .sort(sortOption)
         .skip(skip)
         .limit(currentLimit)
         .lean(),
 
-      ProductModel.countDocuments({ ...filters, status: "active" }),
+      ProductModel.countDocuments({ ...filters }),
     ]);
 
     return {
@@ -93,4 +107,12 @@ export const getProducts = async ({
       },
     };
   }
+};
+
+export const getProducts = async (
+  props: GetProductsProps = {},
+): Promise<PaginatedProducts> => {
+  const isAdmin = await isCurrentUserAdmin();
+
+  return getCachedProducts(props, isAdmin);
 };

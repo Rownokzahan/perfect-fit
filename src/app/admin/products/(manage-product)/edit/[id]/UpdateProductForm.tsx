@@ -39,7 +39,7 @@ const UpdateProductForm = ({ product, categories }: UpdateProductFormProps) => {
     }
 
     startTransition(async () => {
-      const result = await updateProduct({
+      const error = await updateProduct({
         productId: _id,
         categoryId: data.category,
         name: data.name,
@@ -49,10 +49,10 @@ const UpdateProductForm = ({ product, categories }: UpdateProductFormProps) => {
         image: typeof data.image === "string" ? data.image : data.image[0],
       });
 
-      if (result.success) {
-        reset();
+      if (error) {
+        toast.error(error.message, { duration: 5000 });
       } else {
-        toast.error(result.message, { duration: 5000 });
+        reset();
       }
     });
   };

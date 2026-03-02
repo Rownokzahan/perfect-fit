@@ -29,7 +29,7 @@ const AddProductForm = ({ categories }: AddProductFormProps) => {
     }
 
     startTransition(async () => {
-      const result = await createProduct({
+      const error = await createProduct({
         name,
         description,
         price: Number(price), // input makes it string
@@ -38,10 +38,10 @@ const AddProductForm = ({ categories }: AddProductFormProps) => {
         image: firstImage,
       });
 
-      if (result.success) {
-        reset();
+      if (error) {
+        toast.error(error.message, { duration: 5000 });
       } else {
-        toast.error(result.message, { duration: 5000 });
+        reset();
       }
     });
   };

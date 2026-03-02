@@ -10,7 +10,9 @@ const ProductTableContainer = ({ children }: ProductTableContainerProps) => {
           <tr>
             <th className="px-4 py-3">Image</th>
             <th className="px-4 py-3">Name</th>
+            <th className="px-4 py-3">Stock</th>
             <th className="px-4 py-3">Price</th>
+            <th className="px-4 py-3">Active</th>
             <th className="px-4 py-3 text-center">Actions</th>
           </tr>
         </thead>

@@ -1,6 +1,12 @@
 import { Id } from ".";
 
-export type ProductStatus = "active" | "inactive" | "archived";
+const PRODUCT_STATUSES = ["active", "inactive", "archived"] as const;
+
+export type ProductStatus = (typeof PRODUCT_STATUSES)[number];
+
+export const isProductStatus = (value: string): value is ProductStatus => {
+  return PRODUCT_STATUSES.includes(value as ProductStatus);
+};
 
 export interface Product {
   _id: Id;

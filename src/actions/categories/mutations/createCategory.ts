@@ -22,7 +22,7 @@ export const createCategory = requireAdmin(
     ];
 
     for (const v of validators) {
-      if (!v.valid) return { success: false, message: v.message };
+      if (!v.valid) return { error: true, message: v.message };
     }
 
     try {
@@ -43,7 +43,7 @@ export const createCategory = requireAdmin(
       updateTag("categories");
     } catch (err) {
       console.error(err);
-      return { success: false, message: "Failed to create category" };
+      return { error: true, message: "Failed to create category" };
     }
 
     // Redirect after success
