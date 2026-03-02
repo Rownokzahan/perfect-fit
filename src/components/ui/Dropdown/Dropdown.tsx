@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
   useLayoutEffect,
+  useEffect,
 } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -17,6 +18,7 @@ interface DropdownProps {
 }
 
 const Dropdown = ({ isOpen, setIsOpen, title, children }: DropdownProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | string>(0);
 
@@ -28,8 +30,30 @@ const Dropdown = ({ isOpen, setIsOpen, title, children }: DropdownProps) => {
     }
   }, [isOpen]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [isOpen, setIsOpen]);
+
   return (
-    <div className="min-w-0 max-w-full w-full sm:w-48 relative">
+    <div
+      ref={containerRef}
+      className="min-w-0 max-w-full w-full sm:w-48 relative"
+    >
       {/* Dropdown Button */}
       <button
         className="w-full h-10 px-4 border rounded bg-light-light flex items-center justify-between gap-2"
@@ -49,6 +73,6 @@ const Dropdown = ({ isOpen, setIsOpen, title, children }: DropdownProps) => {
       </div>
     </div>
   );
-};
+};;
 
 export default Dropdown;
