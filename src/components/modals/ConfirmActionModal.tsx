@@ -1,10 +1,20 @@
+"use client";
+
 import Modal from "./Modal";
 import Button from "../ui/Button";
 import { LuArchiveRestore, LuTrash2 } from "react-icons/lu";
 import useModalById from "@/hooks/useModalById";
 import { resolveConfirmActionModal } from "@/hooks/useConfirmActionModal";
+import { ActionType } from "@/types/modal";
+import { IconType } from "react-icons";
 
-const a = {
+const ACTION_CONFIG: Record<
+  ActionType,
+  {
+    Icon: IconType;
+    label: string;
+  }
+> = {
   delete: {
     Icon: LuTrash2,
     label: "Delete",
@@ -30,7 +40,7 @@ const ConfirmActionModal = () => {
     closeModal();
   };
 
-  const { Icon, label } = a[action];
+  const { Icon, label } = ACTION_CONFIG[action];
 
   return (
     <Modal
