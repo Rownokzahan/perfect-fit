@@ -1,7 +1,7 @@
 "use client";
 
 import { deleteCategory } from "@/actions/categories/mutations/deleteCategory";
-import { useConfirmDeleteModal } from "@/hooks/useConfirmDeleteModal";
+import { useConfirmActionModal } from "@/hooks/useConfirmActionModal";
 import { Id } from "@/types";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
@@ -12,13 +12,14 @@ interface DeleteCategoryButtonProps {
 }
 
 const DeleteCategoryButton = ({ categoryId }: DeleteCategoryButtonProps) => {
-  const confirmDelete = useConfirmDeleteModal();
+  const confirmDelete = useConfirmActionModal();
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = async () => {
-    const confirmed = await confirmDelete(
-      "Are you sure you want to delete this category?",
-    );
+    const confirmed = await confirmDelete({
+      message: "Are you sure you want to delete this category?",
+      action: "delete",
+    });
 
     if (!confirmed) {
       return;

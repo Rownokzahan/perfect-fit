@@ -1,7 +1,7 @@
 "use client";
 
 import { softDeleteProduct } from "@/actions/products/mutations/softDeleteProduct";
-import { useConfirmDeleteModal } from "@/hooks/useConfirmDeleteModal";
+import { useConfirmActionModal } from "@/hooks/useConfirmActionModal";
 import { Id } from "@/types";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
@@ -12,13 +12,14 @@ interface DeleteProductButtonProps {
 }
 
 const DeleteProductButton = ({ productId }: DeleteProductButtonProps) => {
-  const confirmDelete = useConfirmDeleteModal();
+  const confirmDelete = useConfirmActionModal();
   const [isPending, startTransition] = useTransition();
 
   const handleDelete = async () => {
-    const confirmed = await confirmDelete(
-      "Are you sure you want to soft delete this product?",
-    );
+    const confirmed = await confirmDelete({
+      message: "Are you sure you want to soft delete this product?",
+      action: "delete",
+    });
 
     if (!confirmed) {
       return;
@@ -33,7 +34,11 @@ const DeleteProductButton = ({ productId }: DeleteProductButtonProps) => {
   };
 
   return (
-    <button onClick={handleDelete} className="size-6 grid place-items-center">
+    <button
+      onClick={handleDelete}
+      title="Delete Product"
+      className="size-6 grid place-items-center"
+    >
       {isPending ? <LuLoader /> : <LuTrash2 />}
     </button>
   );

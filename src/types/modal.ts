@@ -3,6 +3,8 @@ type ModalState<Data = null> = {
   data: Data;
 };
 
+export type ActionType = "delete" | "restore";
+
 export interface ModalsState {
   authModal: ModalState;
   addToCartModal: ModalState;
@@ -10,6 +12,10 @@ export interface ModalsState {
   orderSuccessModal: ModalState;
   confirmDeleteModal: ModalState<{ message: string }>;
   confirmLogoutModal: ModalState;
+  confirmActionModal: ModalState<{
+    message: string;
+    action: ActionType;
+  }>;
 }
 
 export type ModalId = keyof ModalsState;

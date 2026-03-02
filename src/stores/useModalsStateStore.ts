@@ -6,7 +6,7 @@ type State = ModalsState;
 type Action = {
   openModalById: <T extends ModalId>(
     modalId: T,
-    data: ModalsState[T]["data"]
+    data: ModalsState[T]["data"],
   ) => void;
 
   closeModalById: (modalId: ModalId) => void;
@@ -19,6 +19,10 @@ const initialState: State = {
   orderSuccessModal: { isOpen: false, data: null },
   confirmDeleteModal: { isOpen: false, data: { message: "" } },
   confirmLogoutModal: { isOpen: false, data: null },
+  confirmActionModal: {
+    isOpen: false,
+    data: { message: "", action: "delete" },
+  },
 };
 
 export const useModalsStateStore = create<State & { actions: Action }>(

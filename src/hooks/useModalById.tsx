@@ -3,9 +3,9 @@ import { ModalId, ModalsState } from "@/types/modal";
 
 const useModalById = <T extends ModalId>(modalId: T) => {
   const modal = useModalsStateStore((state) => state[modalId]);
-  const { openModalById, closeModalById } = useModalsStateStore(
-    (state) => state.actions
-  );
+  const actions = useModalsStateStore((state) => state.actions);
+
+  const { openModalById, closeModalById } = actions;
 
   const openModal = () => openModalById(modalId, null);
   const openModalWithData = (data: ModalsState[T]["data"]) =>
@@ -15,7 +15,7 @@ const useModalById = <T extends ModalId>(modalId: T) => {
 
   return {
     isModalOpen: modal.isOpen,
-    modalData: modal.data,
+    modalData: modal.data as ModalsState[T]["data"], // This forces the type
     openModal,
     openModalWithData,
     closeModal,
