@@ -2,7 +2,7 @@
 
 import { connectToDatabase } from "@/lib/db";
 import { getUserOrGuestInfo } from "@/lib/utils/userOrGuestInfo";
-import CartModel from "@/models/CartModel";
+import UserStoreModel from "@/models/UserStoreModel";
 import { Error } from "mongoose";
 import { updateTag } from "next/cache";
 
@@ -21,9 +21,9 @@ export const clearCart = async () => {
   try {
     await connectToDatabase();
 
-    await CartModel.findOneAndUpdate(
+    await UserStoreModel.findOneAndUpdate(
       { ownerId },
-      { items: [] },
+      { cartItems: [] },
       { runValidators: true },
     );
 

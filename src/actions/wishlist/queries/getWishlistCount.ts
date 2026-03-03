@@ -1,6 +1,6 @@
 import { connectToDatabase } from "@/lib/db";
 import { getUserOrGuestInfo } from "@/lib/utils/userOrGuestInfo";
-import WishlistModel from "@/models/WishlistModel";
+import UserStoreModel from "@/models/UserStoreModel";
 import { Id } from "@/types";
 import { cacheLife, cacheTag } from "next/cache";
 
@@ -12,12 +12,12 @@ const getCachedWishlistCount = async (ownerId: Id): Promise<number> => {
   try {
     await connectToDatabase();
 
-    const [result] = await WishlistModel.aggregate([
+    const [result] = await UserStoreModel.aggregate([
       { $match: { ownerId } },
       {
         $project: {
           _id: 0,
-          count: { $size: { $ifNull: ["$items", []] } },
+          count: { $size: { $ifNull: ["$wishlistItems", []] } },
         },
       },
     ]);

@@ -1,7 +1,7 @@
 import { connectToDatabase } from "@/lib/db";
 import { toPlainObject } from "@/lib/utils/object";
 import { getUserOrGuestInfo } from "@/lib/utils/userOrGuestInfo";
-import WishlistModel from "@/models/WishlistModel";
+import UserStoreModel from "@/models/UserStoreModel";
 import { Id } from "@/types";
 import { cacheLife, cacheTag } from "next/cache";
 
@@ -13,9 +13,11 @@ const getCachedWishlistedIds = async (ownerId: Id): Promise<Id[]> => {
   try {
     await connectToDatabase();
 
-    const ids = await WishlistModel.distinct("items.productId", { ownerId });
+    const user = await UserStoreModel.findOne({ ownerId })
+      .select("wishlistItems")
+      .lean();
 
-    return toPlainObject(ids);
+    return toPlainObject(user?.wishlistItems ?? []);
   } catch (err) {
     console.error("Failed to fetch wishlisted product Ids:", err);
     return [];

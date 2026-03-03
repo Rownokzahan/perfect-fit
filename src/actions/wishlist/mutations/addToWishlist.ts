@@ -3,12 +3,12 @@
 import { Types } from "mongoose";
 import { connectToDatabase } from "@/lib/db";
 import { validateId } from "@/lib/utils/validators";
-import WishlistModel from "@/models/WishlistModel";
 import { updateTag } from "next/cache";
 import {
   createGuestInfo,
   getUserOrGuestInfo,
 } from "@/lib/utils/userOrGuestInfo";
+import UserStoreModel from "@/models/UserStoreModel";
 
 export const addToWishlist = async (productId: string) => {
   const validation = validateId(productId, "Product ID");
@@ -29,19 +29,11 @@ export const addToWishlist = async (productId: string) => {
 
     const productObjectId = new Types.ObjectId(productId);
 
-    await WishlistModel.findOneAndUpdate(
-      {
-        ownerId,
-        "items.productId": { $ne: productObjectId },
-      },
+    await UserStoreModel.findOneAndUpdate(
+      { ownerId },
       {
         $setOnInsert: { ownerId, userType },
-        $push: {
-          items: {
-            productId: productObjectId,
-            addedAt: new Date(),
-          },
-        },
+        $addToSet: { wishlistItems: productObjectId },
       },
       { upsert: true },
     );

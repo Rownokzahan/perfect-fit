@@ -10,7 +10,7 @@ import EmailField from "@/components/forms/components/EmailField";
 import toast from "react-hot-toast";
 import { useTransition } from "react";
 import { signUp } from "@/lib/auth-client";
-import { mergeGuestWishlist } from "@/actions/wishlist/mutations/mergeGuestWishlist";
+import { mergeGuestToUser } from "@/actions/user/mergeGuestToUser";
 
 interface SignupFormData {
   name: string;
@@ -51,9 +51,9 @@ const SignupForm = () => {
           return;
         }
 
-        const wishlistError = await mergeGuestWishlist();
-        if (wishlistError) {
-          console.warn("Wishlist merge error:", wishlistError.message);
+        const mergeError = await mergeGuestToUser();
+        if (mergeError) {
+          console.warn(mergeError.message);
         }
 
         reset();

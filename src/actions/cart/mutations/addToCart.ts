@@ -5,7 +5,7 @@ import {
   createGuestInfo,
   getUserOrGuestInfo,
 } from "@/lib/utils/userOrGuestInfo";
-import CartModel from "@/models/CartModel";
+import UserStoreModel from "@/models/UserStoreModel";
 import { CartItemWithCustomDress, CartItemWithProduct } from "@/types/cart";
 import { Error } from "mongoose";
 import { updateTag } from "next/cache";
@@ -26,12 +26,12 @@ export const addToCart = async (cartItem: AddToCartPayload) => {
   try {
     await connectToDatabase();
 
-    await CartModel.findOneAndUpdate(
+    await UserStoreModel.findOneAndUpdate(
       { ownerId },
       {
         $setOnInsert: { ownerId, userType },
         $push: {
-          items: cartItem,
+          cartItems: cartItem,
         },
       },
       { upsert: true, runValidators: true },

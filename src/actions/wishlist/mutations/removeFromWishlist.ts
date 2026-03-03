@@ -2,10 +2,11 @@
 
 import { updateTag } from "next/cache";
 import { connectToDatabase } from "@/lib/db";
-import WishlistModel from "@/models/WishlistModel";
 import { Id } from "@/types";
 import { validateId } from "@/lib/utils/validators";
 import { getUserOrGuestInfo } from "@/lib/utils/userOrGuestInfo";
+import UserStoreModel from "@/models/UserStoreModel";
+import { Types } from "mongoose";
 
 export const removeFromWishlist = async (productId: Id) => {
   const validation = validateId(productId, "Product ID");
@@ -27,12 +28,12 @@ export const removeFromWishlist = async (productId: Id) => {
   try {
     await connectToDatabase();
 
-    const result = await WishlistModel.updateOne(
+    const productObjectId = new Types.ObjectId(productId);
+
+    const result = await UserStoreModel.updateOne(
       { ownerId },
       {
-        $pull: {
-          items: { productId: productId },
-        },
+        $pull: { wishlistItems: productObjectId },
       },
     );
 

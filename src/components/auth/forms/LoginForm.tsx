@@ -9,7 +9,7 @@ import useModalById from "@/hooks/useModalById";
 import { useTransition } from "react";
 import EmailField from "@/components/forms/components/EmailField";
 import { signIn } from "@/lib/auth-client";
-import { mergeGuestWishlist } from "@/actions/wishlist/mutations/mergeGuestWishlist";
+import { mergeGuestToUser } from "@/actions/user/mergeGuestToUser";
 
 interface LoginFormData {
   email: string;
@@ -44,9 +44,9 @@ const LoginForm = () => {
           return;
         }
 
-        const wishlistError = await mergeGuestWishlist();
-        if (wishlistError) {
-          console.warn("Wishlist merge error:", wishlistError.message);
+        const mergeError = await mergeGuestToUser();
+        if (mergeError) {
+          console.warn(mergeError.message);
         }
 
         reset();
