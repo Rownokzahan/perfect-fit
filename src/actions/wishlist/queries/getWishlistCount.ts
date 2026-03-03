@@ -12,11 +12,17 @@ const getCachedWishlistCount = async (ownerId: Id): Promise<number> => {
   try {
     await connectToDatabase();
 
-    const wishlist = await WishlistModel.findOne({ ownerId })
-      .select("items")
-      .lean();
+    const [result] = await WishlistModel.aggregate([
+      { $match: { ownerId } },
+      {
+        $project: {
+          _id: 0,
+          count: { $size: { $ifNull: ["$items", []] } },
+        },
+      },
+    ]);
 
-    return wishlist.items?.length;
+    return result?.count || 0;
   } catch (err) {
     console.error("Failed to fetch wishlisted products count:", err);
     return 0;

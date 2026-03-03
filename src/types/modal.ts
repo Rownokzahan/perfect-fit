@@ -3,7 +3,7 @@ type ModalState<Data = null> = {
   data: Data;
 };
 
-export type ActionType = "delete" | "restore";
+export type ActionType = "delete" | "restore" | "clearCart";
 
 export interface ModalsState {
   authModal: ModalState;

@@ -1,12 +1,14 @@
-import useCart from "@/hooks/useCart";
 import CartItemMobile from "./CartItemMobile";
+import { CartItemType } from "@/types/cart";
 
-const CartItemListMobile = () => {
-  const { cart } = useCart();
+interface CartItemListMobileProps {
+  cartItems: CartItemType[];
+}
 
+const CartItemListMobile = ({ cartItems }: CartItemListMobileProps) => {
   return (
     <div className="sm:hidden space-y-2">
-      {cart.map((cartItem) => (
+      {cartItems.map((cartItem) => (
         <CartItemMobile key={cartItem._id} cartItem={cartItem} />
       ))}
     </div>

@@ -1,7 +1,7 @@
-import CartItemListSkeleton from "./CartItemList/CartItemListSkeleton";
-import CartSummarySkeleton from "./CartSummary/CartSummarySkeleton";
+import CartItemListSkeleton from "./components/CartItemList/CartItemListSkeleton";
+import CartSummarySkeleton from "./components/CartSummary/CartSummarySkeleton";
 
-const CartPageContentSkeleton = () => {
+const CartLoadingPage = () => {
   return (
     <div className="ui-container mb-12 mt-5 sm:mt-12 grid grid-cols-1 lg:grid-cols-[60%_1fr] gap-8">
       <div className="space-y-4">
@@ -22,4 +22,4 @@ const CartPageContentSkeleton = () => {
   );
 };
 
-export default CartPageContentSkeleton;
+export default CartLoadingPage;

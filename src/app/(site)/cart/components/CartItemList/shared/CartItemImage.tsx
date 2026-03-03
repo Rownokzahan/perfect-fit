@@ -1,21 +1,26 @@
 import CustomizedProductPreview from "@/components/ui/CustomizedProductPreview";
-import { CustomizedProduct } from "@/types/product";
+import { CartItemType } from "@/types/cart";
 
 interface CartItemImageProps {
-  cartItem: CustomizedProduct;
+  cartItem: CartItemType;
 }
 
 const CartItemImage = ({ cartItem }: CartItemImageProps) => {
   const {
     customizations: { bodiceType, sleeveType, skirtType },
-    product,
     isCustomDress,
-  } = cartItem;
+  } = cartItem || {};
+
+  let productImage = undefined;
+
+  if (!isCustomDress && "product" in cartItem) {
+    productImage = cartItem.product.imageSnapshot;
+  }
 
   return (
     <CustomizedProductPreview
       isCustomDress={isCustomDress}
-      productImage={product?.image}
+      productImage={productImage}
       bodice={bodiceType}
       sleeve={sleeveType}
       skirt={skirtType}

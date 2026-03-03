@@ -1,6 +1,6 @@
 import { connectToDatabase } from "@/lib/db";
 import { getUserOrGuestInfo } from "@/lib/utils/userOrGuestInfo";
-import WishlistModel from "@/models/WishlistModel";
+import CartModel from "@/models/CartModel";
 import { Id } from "@/types";
 import { cacheLife, cacheTag } from "next/cache";
 
@@ -12,11 +12,17 @@ const getCachedCartCount = async (ownerId: Id): Promise<number> => {
   try {
     await connectToDatabase();
 
-    const cart = await WishlistModel.findOne({ ownerId })
-      .select("items")
-      .lean();
+    const [result] = await CartModel.aggregate([
+      { $match: { ownerId } },
+      {
+        $project: {
+          _id: 0,
+          count: { $size: { $ifNull: ["$items", []] } },
+        },
+      },
+    ]);
 
-    return cart.items?.length;
+    return result?.count || 0;
   } catch (err) {
     console.error("Failed to fetch cart items count:", err);
     return 0;

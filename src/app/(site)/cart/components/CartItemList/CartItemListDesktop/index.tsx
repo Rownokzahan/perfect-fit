@@ -1,9 +1,11 @@
-import useCart from "@/hooks/useCart";
+import { CartItemType } from "@/types/cart";
 import CartItemDesktop from "./CartItemDesktop";
 
-const CartItemListDesktop = () => {
-  const { cart } = useCart();
+interface CartItemListDesktopProps {
+  cartItems: CartItemType[];
+}
 
+const CartItemListDesktop = ({ cartItems }: CartItemListDesktopProps) => {
   return (
     <div className="hidden sm:block p-4 sm:p-6 rounded bg-light-light divide-y">
       <div className="pb-3 grid grid-cols-1 sm:grid-cols-[2fr_2fr_1fr_1fr_1fr] gap-6 uppercase text-xs text-dark-light">
@@ -14,7 +16,7 @@ const CartItemListDesktop = () => {
         <span className="font-semibold"></span>
       </div>
 
-      {cart.map((item) => (
+      {cartItems.map((item) => (
         <CartItemDesktop key={item._id} cartItem={item} />
       ))}
     </div>

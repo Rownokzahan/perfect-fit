@@ -7,6 +7,7 @@ import useModalById from "@/hooks/useModalById";
 import { resolveConfirmActionModal } from "@/hooks/useConfirmActionModal";
 import { ActionType } from "@/types/modal";
 import { IconType } from "react-icons";
+import { TbShoppingBagX } from "react-icons/tb";
 
 const ACTION_CONFIG: Record<
   ActionType,
@@ -22,6 +23,10 @@ const ACTION_CONFIG: Record<
   restore: {
     Icon: LuArchiveRestore,
     label: "Restore",
+  },
+  clearCart: {
+    Icon: TbShoppingBagX,
+    label: "Clear Cart",
   },
 };
 

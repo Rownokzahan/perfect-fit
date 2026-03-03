@@ -1,20 +1,26 @@
 "use client";
 
+import { useTransition } from "react";
 import CustomizeStyleSection from "@/components/forms/components/customize/CustomizeStyleSection";
 import MeasurementInputsSection from "@/components/forms/components/customize/MeasurementInputsSection";
 import SpecialRequest from "@/components/forms/components/customize/SpecialRequest";
 import FormSubmitButton from "@/components/forms/components/FormSubmitButton";
-import useCart from "@/hooks/useCart";
 import useModalById from "@/hooks/useModalById";
 import { CustomizationFormData } from "@/types";
 import { Product } from "@/types/product";
 import { useForm } from "react-hook-form";
+import {
+  addToCart,
+  AddToCartPayload,
+} from "@/actions/cart/mutations/addToCart";
+import toast from "react-hot-toast";
 
 interface DressCustomizationProps {
   dress: Product;
 }
 
 const DressCustomization = ({ dress }: DressCustomizationProps) => {
+  const [isPending, startTransition] = useTransition();
   const {
     register,
     handleSubmit,
@@ -22,11 +28,10 @@ const DressCustomization = ({ dress }: DressCustomizationProps) => {
     reset,
   } = useForm<CustomizationFormData>();
 
-  const { addToCart } = useCart();
   const { openModal } = useModalById("addToCartModal");
 
   const handleAddToCart = (data: CustomizationFormData) => {
-    const cartItem = {
+    const cartItem: AddToCartPayload = {
       customizations: {
         bodiceType: data.bodiceType,
         sleeveType: data.sleeveType,
@@ -39,21 +44,28 @@ const DressCustomization = ({ dress }: DressCustomizationProps) => {
         chest: data.chest,
         waist: data.waist,
       },
+      isCustomDress: false,
       product: {
         _id: dress._id,
-        name: dress.name,
-        price: dress.price,
-        image: dress.image,
+        nameSnapshot: dress.name,
+        priceSnapshot: dress.price,
+        imageSnapshot: dress.image,
       },
-      isCustomDress: false,
+
       quantity: 1,
       totalPrice: dress.price,
       request: data.request,
     };
 
-    addToCart(cartItem);
-    reset();
-    openModal();
+    startTransition(async () => {
+      const error = await addToCart(cartItem);
+      if (error) {
+        toast.error(error.message, { duration: 5000 });
+      } else {
+        reset();
+        openModal();
+      }
+    });
   };
 
   return (
@@ -74,7 +86,7 @@ const DressCustomization = ({ dress }: DressCustomizationProps) => {
         <MeasurementInputsSection register={register} errors={errors} />
         <SpecialRequest register={register} error={errors?.request} />
 
-        <FormSubmitButton label="Add to Cart" isFormSubmitting={false} />
+        <FormSubmitButton label="Add to Cart" isFormSubmitting={isPending} />
       </form>
     </div>
   );

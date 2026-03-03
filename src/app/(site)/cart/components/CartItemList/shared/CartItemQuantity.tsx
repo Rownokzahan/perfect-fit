@@ -1,20 +1,26 @@
-import useCart from "@/hooks/useCart";
-import { CustomizedProduct } from "@/types/product";
+"use client";
+
+import { Id } from "@/types";
 import { HiOutlineMinus, HiOutlinePlus } from "react-icons/hi";
 
 interface CartItemQuantityProps {
-  cartItem: CustomizedProduct;
+  cartItemId: Id;
+  quantity: number;
 }
 
-const CartItemQuantity = ({ cartItem }: CartItemQuantityProps) => {
-  const { _id, quantity } = cartItem;
-  const { decreaseCartItemQuantity, increaseCartItemQuantity } = useCart();
+const CartItemQuantity = ({ cartItemId, quantity }: CartItemQuantityProps) => {
+  const decreaseCartItemQuantity = (cartItemId: Id) => {
+    console.log(cartItemId);
+  };
+  const increaseCartItemQuantity = (cartItemId: Id) => {
+    console.log(cartItemId);
+  };
 
   return (
     <div className="flex items-center gap-4">
       <div className="flex items-center gap-2 place-items-center">
         <button
-          onClick={() => decreaseCartItemQuantity(_id)}
+          onClick={() => decreaseCartItemQuantity(cartItemId)}
           aria-label="Decrease quantity"
           className="size-6 border rounded grid place-items-center"
         >
@@ -24,7 +30,7 @@ const CartItemQuantity = ({ cartItem }: CartItemQuantityProps) => {
         <p className="font-medium text-sm">{quantity}</p>
 
         <button
-          onClick={() => increaseCartItemQuantity(_id)}
+          onClick={() => increaseCartItemQuantity(cartItemId)}
           aria-label="Increase quantity"
           className="size-6 border rounded grid place-items-center"
         >
