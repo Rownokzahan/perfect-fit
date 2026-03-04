@@ -1,6 +1,5 @@
-import { headers } from "next/headers";
-import { auth } from "../auth";
 import { createGuestId, getGuestId } from "./guestId";
+import { getCurrentUser } from "./getCurrentUser";
 
 interface UserOrGuestInfo {
   ownerId: string;
@@ -8,11 +7,11 @@ interface UserOrGuestInfo {
 }
 
 export const getUserOrGuestInfo = async (): Promise<UserOrGuestInfo | null> => {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const user = await getCurrentUser();
 
-  if (session?.user?.id) {
+  if (user) {
     return {
-      ownerId: session.user.id,
+      ownerId: user.id,
       userType: "user",
     };
   }

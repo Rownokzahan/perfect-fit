@@ -1,22 +1,21 @@
 "use server";
 
-import { auth } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
+import { getCurrentUser } from "@/lib/utils/getCurrentUser";
 import { getGuestId, removeGuestId } from "@/lib/utils/guestId";
 import UserStoreModel from "@/models/UserStoreModel";
 import { revalidateTag, updateTag } from "next/cache";
-import { headers } from "next/headers";
 
 /**
  * Synchronizes Guest wishlist and cart items into User account:
  */
 export const mergeGuestToUser = async () => {
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session?.user?.id) {
+  const user = await getCurrentUser();
+  if (!user) {
     return { error: true, message: "User not logged in" };
   }
 
-  const userId = session.user.id;
+  const userId = user.id;
   const guestId = await getGuestId();
 
   if (!guestId) {

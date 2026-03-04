@@ -1,12 +1,11 @@
-import { headers } from "next/headers";
-import { auth } from "../auth";
+import { getCurrentUser } from "./getCurrentUser";
 
 /**
  * Returns true if the current user is an admin, false otherwise
  */
 export const isCurrentUserAdmin = async (): Promise<boolean> => {
-  const session = await auth.api.getSession({ headers: await headers() });
-  return !!session && session.user.role === "admin";
+  const user = await getCurrentUser();
+  return !!user && user.role === "admin";
 };
 
 // Returned when a user is not an admin
