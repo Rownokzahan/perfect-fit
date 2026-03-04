@@ -6,13 +6,9 @@ import {
   getUserOrGuestInfo,
 } from "@/lib/utils/userOrGuestInfo";
 import UserStoreModel from "@/models/UserStoreModel";
-import { CartItemWithCustomDress, CartItemWithProduct } from "@/types/cart";
+import { AddToCartPayload } from "@/types/cart";
 import { Error } from "mongoose";
 import { updateTag } from "next/cache";
-
-export type AddToCartPayload =
-  | Omit<CartItemWithProduct, "_id">
-  | Omit<CartItemWithCustomDress, "_id">;
 
 export const addToCart = async (cartItem: AddToCartPayload) => {
   let ownerInfo = await getUserOrGuestInfo();

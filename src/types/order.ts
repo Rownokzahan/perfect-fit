@@ -1,5 +1,5 @@
 import { Id } from ".";
-import { CustomizedProduct } from "./product";
+// import { CustomizedProduct } from "./product";
 
 export type OrderStatusType =
   | "pending"
@@ -18,7 +18,7 @@ export interface Order {
     phoneNumber: string;
     deliveryAddress: string;
   };
-  items: CustomizedProduct[];
+  // items: CustomizedProduct[];
   totalPrice: number;
   paymentMethod: "cash on delivery" | "online";
 }

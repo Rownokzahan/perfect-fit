@@ -17,19 +17,16 @@ const getCachedCartItems = async (ownerId: Id): Promise<CartItemType[]> => {
     const [cart] = await UserStoreModel.aggregate([
       { $match: { ownerId } },
       { $unwind: { path: "$cartItems", preserveNullAndEmptyArrays: true } },
-      { $sort: { "items.createdAt": -1 } },
+      { $sort: { "cartItems.createdAt": -1 } },
       {
         $group: {
           _id: "$_id",
-          items: { $push: "$items" },
+          items: { $push: "$cartItems" },
         },
       },
     ]);
 
     const items = cart?.items || [];
-
-    console.log(items)
-
     return toPlainObject(items);
   } catch (err) {
     console.error("Failed to fetch cart items:", err);

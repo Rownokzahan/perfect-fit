@@ -2,8 +2,15 @@ import { Schema } from "mongoose";
 
 export const cartItemSchema = new Schema(
   {
-    customizations: {
+    customizedProduct: {
       type: {
+        productType: {
+          type: String,
+          enum: ["customDress", "product"],
+          required: [true, "Customization type is required"],
+        },
+
+        // Base customization fields
         bodiceType: {
           type: String,
           required: [true, "Bodice type is required"],
@@ -20,12 +27,8 @@ export const cartItemSchema = new Schema(
           type: String,
           required: [true, "Fabric is required"],
         },
-      },
-      required: [true, "Customizations are required"],
-      _id: false,
-    },
-    measurements: {
-      type: {
+
+        // Measurements
         length: {
           type: Number,
           required: [true, "Length measurement is required"],
@@ -42,74 +45,55 @@ export const cartItemSchema = new Schema(
           type: Number,
           required: [true, "Waist measurement is required"],
         },
-      },
-      required: [true, "Measurements are required"],
-      _id: false,
-    },
-    product: {
-      type: {
-        _id: {
-          type: Schema.Types.ObjectId,
-          ref: "Product",
-          required: [true, "Product ID is required"],
-        },
-        nameSnapshot: {
+
+        // Request notes
+        request: {
           type: String,
-          required: [true, "Product name snapshot is required"],
+          default: "",
         },
-        priceSnapshot: {
-          type: Number,
-          required: [true, "Product price snapshot is required"],
-          min: [0, "Price cannot be negative"],
-        },
-        imageSnapshot: {
-          type: String,
-          required: [true, "Product image snapshot is required"],
-        },
-      },
-      required: [
-        function (this: { isCustomDress: boolean }) {
-          return !this.isCustomDress;
-        },
-        "Product is required when isCustomDress is false",
-      ],
-      _id: false,
-    },
-    isCustomDress: {
-      type: Boolean,
-      required: [true, "Please specify if this is a custom dress"],
-    },
-    customDress: {
-      type: {
-        name: {
-          type: String,
-          required: [true, "Custom dress name is required"],
-        },
-        price: {
-          type: Number,
-          required: [true, "Custom dress price is required"],
-          min: [0, "Price cannot be negative"],
+
+        product: {
+          type: {
+            productId: {
+              type: Schema.Types.ObjectId,
+              ref: "Product",
+              required: [true, "Product ID is required"],
+            },
+            slugSnapshot: {
+              type: String,
+              required: [true, "Product slug snapshot is required"],
+            },
+            imageSnapshot: {
+              type: String,
+              required: [true, "Product image snapshot is required"],
+            },
+          },
+          _id: false,
         },
       },
-      required: [
-        function (this: { isCustomDress: boolean }) {
-          return this.isCustomDress;
-        },
-        "Custom dress is required when isCustomDress is true",
-      ],
+      required: [true, "Customized product is required"],
       _id: false,
     },
-    request: String,
+
+    name: {
+      type: String,
+      required: [true, "Name is required"],
+    },
     quantity: {
       type: Number,
       required: [true, "Quantity is required"],
       default: 1,
       min: [1, "Quantity must be at least 1"],
     },
-    totalPrice: {
+    unitPrice: {
       type: Number,
-      required: [true, "Total price is required"],
-      min: [0, "Total price cannot be negative"],
+      required: [true, "Unit price is required"],
+      min: [0, "Unit price cannot be negative"],
+    },
+    subtotal: {
+      type: Number,
+      required: [true, "Subtotal is required"],
+      min: [0, "Subtotal cannot be negative"],
     },
   },
   {

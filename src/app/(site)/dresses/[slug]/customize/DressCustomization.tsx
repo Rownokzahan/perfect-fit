@@ -9,11 +9,9 @@ import useModalById from "@/hooks/useModalById";
 import { CustomizationFormData } from "@/types";
 import { Product } from "@/types/product";
 import { useForm } from "react-hook-form";
-import {
-  addToCart,
-  AddToCartPayload,
-} from "@/actions/cart/mutations/addToCart";
+import { addToCart } from "@/actions/cart/mutations/addToCart";
 import toast from "react-hot-toast";
+import { AddToCartPayload } from "@/types/cart";
 
 interface DressCustomizationProps {
   dress: Product;
@@ -32,29 +30,33 @@ const DressCustomization = ({ dress }: DressCustomizationProps) => {
 
   const handleAddToCart = (data: CustomizationFormData) => {
     const cartItem: AddToCartPayload = {
-      customizations: {
+      customizedProduct: {
         bodiceType: data.bodiceType,
         sleeveType: data.sleeveType,
         skirtType: data.skirtType,
         fabric: data.fabric,
-      },
-      measurements: {
+
         length: data.length,
         sleeveLength: data.sleeveLength,
         chest: data.chest,
         waist: data.waist,
-      },
-      isCustomDress: false,
-      product: {
-        _id: dress._id,
-        nameSnapshot: dress.name,
-        priceSnapshot: dress.price,
-        imageSnapshot: dress.image,
+
+        request: data.request,
+
+        productType: "product",
+
+        product: {
+          productId: dress._id,
+          slugSnapshot: dress.slug,
+          priceSnapshot: dress.price,
+          imageSnapshot: dress.image,
+        },
       },
 
+      name: dress.name,
       quantity: 1,
-      totalPrice: dress.price,
-      request: data.request,
+      unitPrice: dress.price,
+      subtotal: dress.price,
     };
 
     startTransition(async () => {

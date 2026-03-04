@@ -20,38 +20,6 @@ export interface Product {
   status: ProductStatus;
 }
 
-export interface CustomizedProduct {
-  _id: Id;
-  customizations: {
-    bodiceType: string;
-    sleeveType: string;
-    skirtType: string;
-    fabric: string;
-  };
-  measurements: {
-    length: number;
-    sleeveLength: number;
-    chest: number;
-    waist: number;
-  };
-  product?: {
-    _id: Id;
-    name: string;
-    price: number;
-    image: string;
-  };
-
-  isCustomDress: boolean;
-  customDress?: {
-    name: string;
-    price: number;
-  };
-
-  request: string;
-  quantity: number;
-  totalPrice: number;
-}
-
 export interface PaginatedProducts {
   products: Product[];
   pagination: {
@@ -61,3 +29,37 @@ export interface PaginatedProducts {
     limit: number;
   };
 }
+
+// ------------- Customized Product Type -------------
+
+interface CustomizedProductBase {
+  bodiceType: string;
+  sleeveType: string;
+  skirtType: string;
+  fabric: string;
+
+  length: number;
+  sleeveLength: number;
+  chest: number;
+  waist: number;
+
+  request: string;
+}
+
+interface CustomDressCustomization extends CustomizedProductBase {
+  productType: "customDress";
+}
+
+interface ProductBasedCustomization extends CustomizedProductBase {
+  productType: "product";
+  product: {
+    productId: Id;
+    slugSnapshot: string;
+    priceSnapshot: number;
+    imageSnapshot: string;
+  };
+}
+
+export type CustomizedProduct =
+  | CustomDressCustomization
+  | ProductBasedCustomization;

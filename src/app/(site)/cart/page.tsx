@@ -15,10 +15,7 @@ const CartPage = async () => {
     return <NoCartItemFound />;
   }
 
-  const cartTotal = cartItems.reduce(
-    (total, item) => total + item.totalPrice,
-    0,
-  );
+  const cartTotal = cartItems.reduce((total, item) => total + item.subtotal, 0);
 
   return (
     <div className="ui-container mb-12 mt-5 sm:mt-12 grid grid-cols-1 lg:grid-cols-[60%_1fr] gap-8">

@@ -1,44 +1,45 @@
 import Image from "next/image";
 import CustomDressPreview from "./CustomDressPreview";
+import { CustomizedProduct } from "@/types/product";
+import Link from "next/link";
 
 interface CustomizedProductPreviewProps {
-  isCustomDress: boolean;
-  productImage?: string;
-  bodice?: string;
-  sleeve?: string;
-  skirt?: string;
+  customizedProduct: CustomizedProduct;
 }
 
 const CustomizedProductPreview = ({
-  isCustomDress,
-  productImage,
-  bodice,
-  sleeve,
-  skirt,
+  customizedProduct,
 }: CustomizedProductPreviewProps) => {
-  if (isCustomDress) {
+  if (customizedProduct.productType === "customDress") {
+    const { bodiceType, sleeveType, skirtType } = customizedProduct;
+
     return (
-      <div className="size-full">
+      <Link href={"/custom-dress"} className="block size-full">
         <CustomDressPreview
-          bodice={bodice || ""}
-          sleeve={sleeve || ""}
-          skirt={skirt || ""}
+          bodice={bodiceType || ""}
+          sleeve={sleeveType || ""}
+          skirt={skirtType || ""}
         />
-      </div>
+      </Link>
     );
   }
 
+  const { slugSnapshot, imageSnapshot } = customizedProduct.product;
+
   return (
-    <figure className="size-full">
+    <Link
+      href={`/dresses/${slugSnapshot}/customize`}
+      className="block size-full"
+    >
       <Image
-        src={productImage || "/placeholder.jpg"}
+        src={imageSnapshot || "/placeholder.jpg"}
         alt="Product Image"
         width={400}
         height={700}
         className="size-full rounded object-cover object-top bg-gray-200"
         unoptimized
       />
-    </figure>
+    </Link>
   );
 };
 

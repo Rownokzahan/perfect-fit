@@ -1,25 +1,25 @@
-import { CartItemType } from "@/types/cart";
-
-const getName = (customizedProduct: CartItemType) => {
-  if (customizedProduct.isCustomDress) {
-    return customizedProduct.customDress.name;
-  }
-  return customizedProduct.product.nameSnapshot;
-};
+import { CustomizedProduct } from "@/types/product";
 
 interface CustomizedProductInfoProps {
-  customizedProduct: CartItemType;
+  customizedProduct: CustomizedProduct;
+  name: string;
 }
 
 const CustomizedProductInfo = ({
   customizedProduct,
+  name,
 }: CustomizedProductInfoProps) => {
-  const { customizations, measurements, request } = customizedProduct;
-
-  const name = getName(customizedProduct);
-
-  const { bodiceType, sleeveType, skirtType, fabric } = customizations || {};
-  const { length, sleeveLength, chest, waist } = measurements || {};
+  const {
+    bodiceType,
+    sleeveType,
+    skirtType,
+    fabric,
+    length,
+    sleeveLength,
+    chest,
+    waist,
+    request,
+  } = customizedProduct;
 
   return (
     <div className="min-w-0 space-y-2">
