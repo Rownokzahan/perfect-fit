@@ -25,6 +25,7 @@ const DressesPage = async ({ searchParams }: Params) => {
     category,
     sort,
     limit: 10,
+    status: "active",
   });
 
   return (
