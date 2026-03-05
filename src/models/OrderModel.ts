@@ -1,6 +1,5 @@
 import { InferSchemaType, Model, model, models, Schema } from "mongoose";
 import { cartItemSchema } from "./CartItem";
-import { CartItemType } from "@/types/cart";
 
 const OrderSchema = new Schema(
   {
@@ -27,10 +26,7 @@ const OrderSchema = new Schema(
     },
     items: {
       type: [cartItemSchema],
-      validate: {
-        validator: (arr: CartItemType[]) => arr && arr.length > 0,
-        message: "At least one cart item is required.",
-      },
+      required: [true, "At least one cart item is required."],
     },
     totalPrice: {
       type: Number,

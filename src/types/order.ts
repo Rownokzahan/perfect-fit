@@ -14,7 +14,7 @@ export interface DeliveryInfo {
   deliveryAddress: string;
 }
 
-export interface Order {
+export interface OrderType {
   _id: Id;
   user: Id;
   deliveryInfo: DeliveryInfo;
