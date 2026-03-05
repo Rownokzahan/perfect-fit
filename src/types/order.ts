@@ -1,5 +1,5 @@
 import { Id } from ".";
-// import { CustomizedProduct } from "./product";
+import { CartItemType } from "./cart";
 
 export type OrderStatusType =
   | "pending"
@@ -7,18 +7,20 @@ export type OrderStatusType =
   | "processing"
   | "delivered";
 
+export interface DeliveryInfo {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  deliveryAddress: string;
+}
+
 export interface Order {
   _id: Id;
   user: Id;
+  deliveryInfo: DeliveryInfo;
+  items: CartItemType[];
+  totalPrice: number;
   createdAt: string;
   status: OrderStatusType;
-  deliveryDetails: {
-    name: string;
-    email: string;
-    phoneNumber: string;
-    deliveryAddress: string;
-  };
-  // items: CustomizedProduct[];
-  totalPrice: number;
   paymentMethod: "cash on delivery" | "online";
 }
