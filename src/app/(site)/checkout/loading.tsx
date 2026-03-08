@@ -1,9 +1,12 @@
 import CheckoutContainer from "./components/CheckoutContainer";
+import DeliveryInfoFormSkeleton from "./components/DeliveryInfoForm/DeliveryInfoFormSkeleton";
+import YourCartSkeleton from "./components/YourCart/YourCartSkeleton";
 
 const CheckoutLoadingPage = () => {
   return (
     <CheckoutContainer>
-      <h1>CheckoutLoadingPage</h1>
+      <DeliveryInfoFormSkeleton />
+      <YourCartSkeleton />
     </CheckoutContainer>
   );
 };
