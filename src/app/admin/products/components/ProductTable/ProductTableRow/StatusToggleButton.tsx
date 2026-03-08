@@ -28,8 +28,6 @@ const StatusToggleButton = ({ status, productId }: StatusToggleButtonProps) => {
     });
   };
 
-  console.log({ isActive, isPending });
-
   return (
     <div
       onClick={handleToggle}
