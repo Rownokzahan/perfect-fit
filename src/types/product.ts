@@ -29,37 +29,3 @@ export interface PaginatedProducts {
     limit: number;
   };
 }
-
-// ------------- Customized Product Type -------------
-
-interface CustomizedProductBase {
-  bodiceType: string;
-  sleeveType: string;
-  skirtType: string;
-  fabric: string;
-
-  length: number;
-  sleeveLength: number;
-  chest: number;
-  waist: number;
-
-  request: string;
-}
-
-interface CustomDressCustomization extends CustomizedProductBase {
-  productType: "customDress";
-}
-
-interface ProductBasedCustomization extends CustomizedProductBase {
-  productType: "product";
-  product: {
-    productId: Id;
-    slugSnapshot: string;
-    priceSnapshot: number;
-    imageSnapshot: string;
-  };
-}
-
-export type CustomizedProduct =
-  | CustomDressCustomization
-  | ProductBasedCustomization;

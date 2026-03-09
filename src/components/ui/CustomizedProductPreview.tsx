@@ -1,17 +1,16 @@
 import Image from "next/image";
 import CustomDressPreview from "./CustomDressPreview";
-import { CustomizedProduct } from "@/types/product";
 import Link from "next/link";
+import { CartItemType } from "@/types/cart";
 
 interface CustomizedProductPreviewProps {
-  customizedProduct: CustomizedProduct;
+  item: CartItemType;
 }
 
-const CustomizedProductPreview = ({
-  customizedProduct,
-}: CustomizedProductPreviewProps) => {
-  if (customizedProduct.productType === "customDress") {
-    const { bodiceType, sleeveType, skirtType } = customizedProduct;
+const CustomizedProductPreview = ({ item }: CustomizedProductPreviewProps) => {
+  const { customizations, productType } = item;
+  if (productType === "customDress") {
+    const { bodiceType, sleeveType, skirtType } = customizations;
 
     return (
       <Link href={"/custom-dress"} className="block size-full">
@@ -24,7 +23,7 @@ const CustomizedProductPreview = ({
     );
   }
 
-  const { slugSnapshot, imageSnapshot } = customizedProduct.product;
+  const { slugSnapshot, imageSnapshot } = item.product;
 
   return (
     <Link

@@ -30,33 +30,20 @@ const DressCustomization = ({ dress }: DressCustomizationProps) => {
 
   const handleAddToCart = (data: CustomizationFormData) => {
     const cartItem: AddToCartPayload = {
-      customizedProduct: {
+      customizations: {
         bodiceType: data.bodiceType,
         sleeveType: data.sleeveType,
         skirtType: data.skirtType,
         fabric: data.fabric,
-
         length: data.length,
         sleeveLength: data.sleeveLength,
         chest: data.chest,
         waist: data.waist,
-
         request: data.request,
-
-        productType: "product",
-
-        product: {
-          productId: dress._id,
-          slugSnapshot: dress.slug,
-          priceSnapshot: dress.price,
-          imageSnapshot: dress.image,
-        },
       },
 
-      name: dress.name,
-      quantity: 1,
-      unitPrice: dress.price,
-      subtotal: dress.price,
+      productType: "product",
+      productId: dress._id,
     };
 
     startTransition(async () => {

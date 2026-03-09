@@ -44,7 +44,7 @@ export const getOrderById = async (orderId: Id) => {
   const user = await getCurrentUser();
 
   if (!user) {
-    redirect("unauthorized");
+    redirect("/unauthorized");
   }
 
   const isAdmin = user.role === "admin";

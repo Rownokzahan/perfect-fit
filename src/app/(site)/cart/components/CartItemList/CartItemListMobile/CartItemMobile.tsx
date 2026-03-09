@@ -10,34 +10,36 @@ interface CartItemMobileProps {
 }
 
 const CartItemMobile = ({ cartItem }: CartItemMobileProps) => {
-  const { _id, name, customizedProduct, subtotal, quantity } = cartItem;
+  const { _id, name, customizations, subtotal, quantity, stock } =
+    cartItem || {};
 
   return (
     <div className="rounded bg-light-light">
       <div className="p-4 grid grid-cols-[1.8fr_2fr] gap-4">
-        <CustomizedProductPreview customizedProduct={customizedProduct} />
+        <CustomizedProductPreview item={cartItem} />
 
         <div className="w-full min-w-0 flex flex-col justify-between space-y-2">
-          <CustomizedProductInfo
-            customizedProduct={customizedProduct}
-            name={name}
-          />
+          <CustomizedProductInfo customizations={customizations} name={name} />
 
           <div className="flex flex-wrap gap-2 items-center justify-between">
             <h3 className="font-medium">${subtotal}</h3>
-            <CartItemQuantity cartItemId={_id} quantity={quantity} />
+            <CartItemQuantity
+              cartItemId={_id}
+              quantity={quantity}
+              stock={stock}
+            />
           </div>
         </div>
       </div>
 
       <div className="h-10 border-t grid grid-cols-2 divide-x">
-        {customizedProduct.productType === "customDress" ? (
+        {cartItem.productType === "customDress" ? (
           <MoveToWishlistButton isCustomDress={true} />
         ) : (
           <MoveToWishlistButton
             cartItemId={_id}
             isCustomDress={false}
-            productId={customizedProduct.product.productId}
+            productId={cartItem.product.productId}
           />
         )}
 

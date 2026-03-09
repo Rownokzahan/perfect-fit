@@ -8,8 +8,8 @@ interface CartItemListMobileProps {
 const CartItemListMobile = ({ cartItems }: CartItemListMobileProps) => {
   return (
     <div className="sm:hidden space-y-2">
-      {cartItems.map((cartItem) => (
-        <CartItemMobile key={cartItem._id} cartItem={cartItem} />
+      {cartItems.map((cartItem, index) => (
+        <CartItemMobile key={index} cartItem={cartItem} />
       ))}
     </div>
   );

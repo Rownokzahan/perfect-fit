@@ -16,8 +16,8 @@ const CartItemListDesktop = ({ cartItems }: CartItemListDesktopProps) => {
         <span className="font-semibold"></span>
       </div>
 
-      {cartItems.map((item) => (
-        <CartItemDesktop key={item._id} cartItem={item} />
+      {cartItems.map((item, index) => (
+        <CartItemDesktop key={index} cartItem={item} />
       ))}
     </div>
   );

@@ -17,8 +17,7 @@ const OrderItemsCard = ({ orderItems }: OrderItemsCardProps) => {
 
       <div className="divide-y">
         {orderItems.map((item) => {
-          const { _id, name, quantity, subtotal, customizedProduct } =
-            item || {};
+          const { _id, name, quantity, subtotal, customizations } = item || {};
 
           return (
             <div key={_id} className="py-4">
@@ -32,13 +31,11 @@ const OrderItemsCard = ({ orderItems }: OrderItemsCardProps) => {
                   "gap-4 sm:gap-6 sm:items-center",
                 )}
               >
-                <CustomizedProductPreview
-                  customizedProduct={customizedProduct}
-                />
+                <CustomizedProductPreview item={item} />
 
                 <div className="min-w-0">
                   <CustomizedProductInfo
-                    customizedProduct={customizedProduct}
+                    customizations={customizations}
                     name={name}
                   />
 

@@ -27,26 +27,19 @@ const CustomDressForm = () => {
 
   const handleAddToCart = (data: CustomizationFormData) => {
     const cartItem: AddToCartPayload = {
-      customizedProduct: {
-        productType: "customDress",
-
+      customizations: {
         bodiceType: data.bodiceType,
         sleeveType: data.sleeveType,
         skirtType: data.skirtType,
         fabric: data.fabric,
-
         length: data.length,
         sleeveLength: data.sleeveLength,
         chest: data.chest,
         waist: data.waist,
-
         request: data.request,
       },
 
-      name: "Custom Dress",
-      quantity: 1,
-      unitPrice: 50,
-      subtotal: 50,
+      productType: "customDress",
     };
 
     startTransition(async () => {

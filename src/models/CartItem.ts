@@ -2,14 +2,48 @@ import { Schema } from "mongoose";
 
 export const cartItemSchema = new Schema(
   {
-    customizedProduct: {
-      type: {
-        productType: {
-          type: String,
-          enum: ["customDress", "product"],
-          required: [true, "Customization type is required"],
-        },
+    productType: {
+      type: String,
+      enum: ["customDress", "product"],
+      required: [true, "Customization type is required"],
+    },
 
+    product: {
+      type: {
+        productId: {
+          type: Schema.Types.ObjectId,
+          ref: "Product",
+          required: [true, "Product ID is required"],
+        },
+        slugSnapshot: {
+          type: String,
+          required: [true, "Product slug snapshot is required"],
+        },
+        nameSnapshot: {
+          type: String,
+          required: [true, "Product name snapshot is required"],
+        },
+        imageSnapshot: {
+          type: String,
+          required: [true, "Product image snapshot is required"],
+        },
+        priceSnapshot: {
+          type: Number,
+          required: [true, "Product price snapshot is required"],
+          min: [0, "Product price cannot be negative"],
+        },
+      },
+      required: [
+        function (this: { productType?: string }) {
+          return this.productType === "product";
+        },
+        "Product info is required for product type 'product'",
+      ],
+      _id: false,
+    },
+
+    customizations: {
+      type: {
         // Base customization fields
         bodiceType: {
           type: String,
@@ -51,49 +85,16 @@ export const cartItemSchema = new Schema(
           type: String,
           default: "",
         },
-
-        product: {
-          type: {
-            productId: {
-              type: Schema.Types.ObjectId,
-              ref: "Product",
-              required: [true, "Product ID is required"],
-            },
-            slugSnapshot: {
-              type: String,
-              required: [true, "Product slug snapshot is required"],
-            },
-            imageSnapshot: {
-              type: String,
-              required: [true, "Product image snapshot is required"],
-            },
-          },
-          _id: false,
-        },
       },
-      required: [true, "Customized product is required"],
+      required: [true, "Customizations are required"],
       _id: false,
     },
 
-    name: {
-      type: String,
-      required: [true, "Name is required"],
-    },
     quantity: {
       type: Number,
       required: [true, "Quantity is required"],
       default: 1,
       min: [1, "Quantity must be at least 1"],
-    },
-    unitPrice: {
-      type: Number,
-      required: [true, "Unit price is required"],
-      min: [0, "Unit price cannot be negative"],
-    },
-    subtotal: {
-      type: Number,
-      required: [true, "Subtotal is required"],
-      min: [0, "Subtotal cannot be negative"],
     },
   },
   {

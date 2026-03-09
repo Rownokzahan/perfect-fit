@@ -12,9 +12,14 @@ import { HiOutlineMinus, HiOutlinePlus } from "react-icons/hi";
 interface CartItemQuantityProps {
   cartItemId: Id;
   quantity: number;
+  stock: number;
 }
 
-const CartItemQuantity = ({ cartItemId, quantity }: CartItemQuantityProps) => {
+const CartItemQuantity = ({
+  cartItemId,
+  quantity,
+  stock,
+}: CartItemQuantityProps) => {
   const [isPending, startTransition] = useTransition();
 
   const handleUpdateQuantity = (action: CartAction) => {
@@ -44,6 +49,7 @@ const CartItemQuantity = ({ cartItemId, quantity }: CartItemQuantityProps) => {
         <button
           onClick={() => handleUpdateQuantity("increase")}
           aria-label="Increase quantity"
+          disabled={isPending || stock === quantity}
           className="size-6 border rounded grid place-items-center disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <HiOutlinePlus className="text-xs" />

@@ -1,12 +1,12 @@
-import { CustomizedProduct } from "@/types/product";
+import { Customizations } from "@/types/cart";
 
 interface CustomizedProductInfoProps {
-  customizedProduct: CustomizedProduct;
+  customizations: Customizations;
   name: string;
 }
 
 const CustomizedProductInfo = ({
-  customizedProduct,
+  customizations,
   name,
 }: CustomizedProductInfoProps) => {
   const {
@@ -19,7 +19,7 @@ const CustomizedProductInfo = ({
     chest,
     waist,
     request,
-  } = customizedProduct;
+  } = customizations;
 
   return (
     <div className="min-w-0 space-y-2">

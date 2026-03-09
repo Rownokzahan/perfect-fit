@@ -1,0 +1,1 @@
+export const CUSTOM_DRESS_UNIT_PRICE = 50;

@@ -31,20 +31,22 @@ export const updateCartItemQuantity = async (
       return { error: true, message: validation.message };
     }
 
+    const cartItemObjectId = new Types.ObjectId(cartItemId);
+
     // Find the cart item to get current quantity and unit price
     const userStore = await UserStoreModel.findOne({
       ownerId,
-      "cartItems._id": new Types.ObjectId(cartItemId),
-    })
-      .select("cartItems")
-      .lean();
+      "cartItems._id": cartItemObjectId,
+    }).select({
+      cartItems: { $elemMatch: { _id: cartItemObjectId } },
+    });
 
-    if (!userStore || !userStore.cartItems[0]) {
+    const cartItem = userStore?.cartItems?.[0];
+
+    if (!cartItem) {
       return { error: true, message: "Cart item not found" };
     }
 
-    const cartItem = userStore.cartItems[0];
-    const unitPrice = cartItem.unitPrice;
     const newQuantity =
       action === "increase" ? cartItem.quantity + 1 : cartItem.quantity - 1;
 
@@ -53,18 +55,15 @@ export const updateCartItemQuantity = async (
       return { error: true, message: "Quantity must be at least 1" };
     }
 
-    const subtotal = newQuantity * unitPrice;
-
     // Update the quantity and subtotal
     await UserStoreModel.updateOne(
       {
         ownerId,
-        "cartItems._id": new Types.ObjectId(cartItemId),
+        "cartItems._id": cartItemObjectId,
       },
       {
         $set: {
           "cartItems.$.quantity": newQuantity,
-          "cartItems.$.subtotal": subtotal,
         },
       },
       { runValidators: true },

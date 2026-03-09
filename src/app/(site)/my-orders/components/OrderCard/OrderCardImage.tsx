@@ -8,14 +8,15 @@ interface OrderCardImageProps {
 }
 
 const OrderCardImage = ({ orderItems }: OrderCardImageProps) => {
-  const firstItem = orderItems[0]?.customizedProduct || {};
-  const { bodiceType, sleeveType, skirtType } = firstItem;
+  const firstItem = orderItems[0];
+  const customizations = firstItem?.customizations;
+  const { bodiceType, sleeveType, skirtType } = customizations || {};
 
   const remainingCount = orderItems.length - 1;
 
   return (
     <div className="w-20 aspect-8/11 rounded bg-gray-100 relative">
-      {firstItem.productType === "customDress" ? (
+      {firstItem?.productType === "customDress" ? (
         <CustomDressPreview
           bodice={bodiceType}
           sleeve={sleeveType}
