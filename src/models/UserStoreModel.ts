@@ -1,5 +1,5 @@
 import { InferSchemaType, Model, model, models, Schema } from "mongoose";
-import { cartItemSchema } from "./CartItem";
+import { cartItemSchema } from "./cartItemSchema";
 
 const UserStoreSchema = new Schema(
   {

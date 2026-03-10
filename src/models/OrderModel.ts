@@ -1,5 +1,5 @@
 import { InferSchemaType, Model, model, models, Schema } from "mongoose";
-import { cartItemSchema } from "./CartItem";
+import { orderItemSchema } from "./orderItemSchema";
 
 const OrderSchema = new Schema(
   {
@@ -25,7 +25,7 @@ const OrderSchema = new Schema(
       _id: false,
     },
     items: {
-      type: [cartItemSchema],
+      type: [orderItemSchema],
       required: [true, "At least one cart item is required."],
     },
     totalPrice: {

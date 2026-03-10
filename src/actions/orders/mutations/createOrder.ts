@@ -6,7 +6,6 @@ import ProductModel from "@/models/ProductModel";
 import OrderModel from "@/models/OrderModel";
 import UserStoreModel from "@/models/UserStoreModel";
 import { DeliveryInfo } from "@/types/order";
-import { CartItemType } from "@/types/cart";
 import mongoose from "mongoose";
 import { updateTag } from "next/cache";
 import { Id } from "@/types";
@@ -23,61 +22,16 @@ class OrderError extends Error {
 type TouchedProduct = {
   id: Id;
   slug: string;
+  quantity: number;
 };
-
-// === HELPER FUNCTIONS ===
-
-/**
- * Extract product quantities from cart items, filtering for regular products only
- */
-function getProductQuantityMap(cartItems: CartItemType[]) {
-  const map = new Map<Id, number>();
-
-  for (const item of cartItems) {
-    if (item.productType !== "product") continue;
-
-    const productId = item.product.productId?.toString();
-    if (!productId) throw new OrderError("Invalid product in cart");
-
-    map.set(productId, (map.get(productId) ?? 0) + item.quantity);
-  }
-
-  return map;
-}
-
-/**
- * Fetch and validate product availability
- */
-async function fetchProducts(
-  productIds: Id[],
-  session: mongoose.ClientSession,
-) {
-  if (!productIds.length) return new Map();
-
-  const products = await ProductModel.find(
-    {
-      _id: { $in: productIds },
-      status: "active",
-      deletedAt: null,
-    },
-    { name: 1, price: 1, slug: 1, image: 1, stock: 1 },
-    { session },
-  ).lean();
-
-  if (products.length !== productIds.length) {
-    throw new OrderError("One or more products are unavailable");
-  }
-
-  return new Map(products.map((p) => [p._id.toString(), p]));
-}
 
 /**
  * Update product stock in bulk and validate success
+ * Session is automatically available in mongoose.connection.transaction()
  */
-async function updateProductStock(
-  productQuantityMap: Map<string, number>,
-  session: mongoose.ClientSession,
-) {
+const updateProductStock = async (productQuantityMap: Map<string, number>) => {
+  if (productQuantityMap.size === 0) return;
+
   const operations = Array.from(productQuantityMap.entries()).map(
     ([productId, quantity]) => ({
       updateOne: {
@@ -92,82 +46,83 @@ async function updateProductStock(
     }),
   );
 
-  if (!operations.length) return;
-
-  const result = await ProductModel.bulkWrite(operations, { session });
+  const result = await ProductModel.bulkWrite(operations);
 
   if (result.modifiedCount !== operations.length) {
     throw new OrderError("One or more products are out of stock");
   }
-}
+};
 
 // === MAIN FUNCTION ===
 
-export async function createOrder({
+export const createOrder = async ({
   deliveryInfo,
 }: {
   deliveryInfo: DeliveryInfo;
-}) {
+}) => {
   const user = await getCurrentUser();
   if (!user?.id) {
     return { error: true, message: "Authentication required" };
   }
 
-  await connectToDatabase();
-  const session = await mongoose.startSession();
   const touchedProducts: TouchedProduct[] = [];
 
   try {
-    await session.withTransaction(async () => {
-      // 1. Fetch cart
-      const cartItems = await getUserCartItems(user.id);
+    const orderItems = await getUserCartItems(user.id);
 
-      if (cartItems.length === 0) {
-        throw new OrderError("Cart is empty");
+    if (orderItems.length === 0) {
+      throw new OrderError("Cart is empty");
+    }
+
+    const productQuantityMap = new Map<string, number>();
+    let totalPrice = 0;
+
+    // Validate items and build product map BEFORE transaction
+    for (const item of orderItems) {
+      if (item.availability !== "available") {
+        throw new OrderError(`${item.name} is not available`);
       }
 
-      // 2. Build product quantity map
-      const productQuantityMap = getProductQuantityMap(cartItems);
-      const productIds = Array.from(productQuantityMap.keys());
-
-      // 3. Fetch and validate products
-      const productMap = await fetchProducts(productIds, session);
-
-      // 4. Update stock atomically
-      await updateProductStock(productQuantityMap, session);
-
-      // 5. Track touched products for cache invalidation
-      for (const [productId] of productQuantityMap.entries()) {
-        const product = productMap.get(productId);
-        if (product) {
-          touchedProducts.push({ id: productId, slug: product.slug });
-        }
+      if (item.productType === "product" && item.product?.productId) {
+        const productId = item.product.productId.toString();
+        productQuantityMap.set(
+          productId,
+          (productQuantityMap.get(productId) ?? 0) + item.quantity,
+        );
+        touchedProducts.push({
+          id: item.product.productId,
+          slug: item.product.slugSnapshot,
+          quantity: item.quantity,
+        });
       }
 
-      const totalPrice = cartItems.reduce(
-        (sum, item) => sum + item.subtotal,
-        0,
-      );
+      totalPrice += item.subtotal;
+    }
 
-      // 6. Create order
-      await OrderModel.create(
-        [
-          {
-            user: user.id,
-            deliveryInfo,
-            items: cartItems,
-            totalPrice,
-            paymentMethod: "cash on delivery",
-          },
-        ],
-        { session },
-      );
+    await connectToDatabase();
 
-      // 7. Clear cart
+    // Use Mongoose 9's Connection#transaction()
+    // The session is automatically passed to all operations inside the callback
+    await mongoose.connection.transaction(async () => {
+      // Create order
+      await OrderModel.create([
+        {
+          user: user.id,
+          deliveryInfo,
+          items: orderItems,
+          totalPrice,
+          paymentMethod: "cash on delivery",
+        },
+      ]);
+
+      // Deduct stock
+      await updateProductStock(productQuantityMap);
+
+      // Clear cart
       const result = await UserStoreModel.updateOne(
         { ownerId: user.id },
         { $set: { cartItems: [] } },
-        { session, runValidators: true },
+        { runValidators: true },
       );
 
       if (!result.matchedCount) {
@@ -175,7 +130,7 @@ export async function createOrder({
       }
     });
 
-    // 8. Invalidate caches (updateTag for Server Actions - read-your-writes)
+    // Invalidate caches
     updateTag(`orders-${user.id}`);
     updateTag(`cart-${user.id}`);
     updateTag("products");
@@ -189,16 +144,11 @@ export async function createOrder({
       return { error: true, message: err.message };
     }
 
-    if (err instanceof mongoose.Error.ValidationError) {
-      const messages = Object.values(err.errors)
-        .map((e) => e.message)
-        .join(", ");
-      return { error: true, message: messages };
+    if (err instanceof Error && err.name === "ValidationError") {
+      return { error: true, message: err.message };
     }
 
     console.error("[createOrder]", err);
     return { error: true, message: "Something went wrong" };
-  } finally {
-    await session.endSession();
   }
-}
+};
