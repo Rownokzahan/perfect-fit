@@ -46,11 +46,11 @@ export const validateNonEmptyString = (
   return { valid: true };
 };
 
-export const validatePositiveNumber = (
+export const validateNonNegativeNumber = (
   value: unknown,
   name: string,
 ): ValidationResult => {
-  if (!value) {
+  if (value === null || value === undefined) {
     return { valid: false, message: `${name} is required` };
   }
 
@@ -58,8 +58,8 @@ export const validatePositiveNumber = (
     return { valid: false, message: `${name} must be a number` };
   }
 
-  if (isNaN(value) || value <= 0) {
-    return { valid: false, message: `${name} must be greater than 0` };
+  if (isNaN(value) || value < 0) {
+    return { valid: false, message: `${name} cannot be negative` };
   }
 
   return { valid: true };

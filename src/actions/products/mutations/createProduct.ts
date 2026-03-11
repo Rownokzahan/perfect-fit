@@ -8,7 +8,7 @@ import {
   validateFile,
   validateId,
   validateNonEmptyString,
-  validatePositiveNumber,
+  validateNonNegativeNumber,
 } from "@/lib/utils/validators";
 import ProductModel from "@/models/ProductModel";
 import { Id } from "@/types";
@@ -37,8 +37,8 @@ export const createProduct = requireAdmin(
     // Basic validation
     const validators = [
       validateNonEmptyString(name, "Product name"),
-      validatePositiveNumber(price, "Product price"),
-      validatePositiveNumber(stock, "Product stock"),
+      validateNonNegativeNumber(price, "Product price"),
+      validateNonNegativeNumber(stock, "Product stock"),
       validateFile(image, "Product image"),
       validateId(categoryId, "Category Id"),
     ];

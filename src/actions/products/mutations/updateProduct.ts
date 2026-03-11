@@ -8,7 +8,7 @@ import {
   validateId,
   validateImageOrUrl,
   validateNonEmptyString,
-  validatePositiveNumber,
+  validateNonNegativeNumber,
 } from "@/lib/utils/validators";
 import ProductModel from "@/models/ProductModel";
 import { Id } from "@/types";
@@ -41,8 +41,8 @@ export const updateProduct = requireAdmin(
       validateId(productId, "Product Id"),
       validateId(categoryId, "Category Id"),
       validateNonEmptyString(name, "Product name"),
-      validatePositiveNumber(price, "Product price"),
-      validatePositiveNumber(stock, "Product stock"),
+      validateNonNegativeNumber(price, "Product price"),
+      validateNonNegativeNumber(stock, "Product stock"),
       validateImageOrUrl(image, "Product image"),
     ];
 
