@@ -41,19 +41,18 @@ export type ProductInfo =
       productType: "customDress";
     };
 
-export type CartItemAvailability = "available" | "unavailable" | "out_of_stock";
-
-export type CartItemBase = {
+export type DBCartItem = {
   _id: Id;
   customizations: Customizations;
+  quantity: number;
+} & ProductInfo;
 
-  // these will be dynamically fetched
+export type CartItemAvailability = "available" | "unavailable" | "out_of_stock";
+
+export type CartItemType = DBCartItem & {
   name: string;
   unitPrice: number;
-  quantity: number;
   subtotal: number;
   availability: CartItemAvailability;
   stock: number;
 };
-
-export type CartItemType = CartItemBase & ProductInfo;
