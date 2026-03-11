@@ -12,7 +12,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
   return (
     <article className="pt-9 ps-9 pe-px h-full relative">
       <div className="relative h-full p-7 shadow rounded bg-light-light flex flex-col justify-between">
-        <p className="text-pretty text-sm sm:text-base">{comment}</p>
+        <p className="text-pretty text-sm md:text-base text-dark-light">{comment}</p>
 
         <div className="mt-4 space-y-1">
           <h3 className="text-lg font-semibold">{name}</h3>

@@ -41,8 +41,8 @@ const reviews: ReviewType[] = [
 const Reviews = () => {
   return (
     <section className="ui-container my-16">
-      <h3 className="mb-6 font-semibold text-2xl sm:text-3xl text-center sm:text-left">
-        Customers <span className="text-primary">Review</span>
+      <h3 className="mb-6 text-2xl sm:text-3xl font-semibold font-playfair text-center sm:text-left">
+        Customers <span className="text-primary">Reviews</span>
       </h3>
 
       <Carousel showArrows={false}>

@@ -30,7 +30,9 @@ const HowItWorks = () => {
   return (
     <section className="bg-secondary">
       <div className="ui-container py-16">
-        <h3 className="mb-10 text-3xl font-semibold text-center">How it works</h3>
+        <h3 className="mb-10 text-2xl sm:text-3xl font-semibold font-playfair text-center">
+          How it works
+        </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           {steps?.map((item) => (

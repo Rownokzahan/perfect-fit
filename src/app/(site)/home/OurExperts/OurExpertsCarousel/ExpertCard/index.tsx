@@ -78,8 +78,8 @@ const ExpertCard = ({ expert }: ExpertCardProps) => {
           "w-full h-16 sm:h-18 p-3 ps-4 rounded-b bg-light-light"
         )}
       >
-        <h3 className="font-semibold text-sm sm:text-base">{name}</h3>
-        <p className="ps-px mt-px text-dark-light text-xs sm:text-sm">
+        <h3 className="font-semibold">{name}</h3>
+        <p className="ps-px mt-px text-dark-light text-sm">
           {designation}
         </p>
       </div>

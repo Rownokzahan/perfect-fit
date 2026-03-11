@@ -27,9 +27,9 @@ const ProductCard = async ({ product }: ProductCardProps) => {
           />
         </figure>
 
-        <div className="px-4 pb-3 font-medium space-y-1">
-          <p className="truncate text-xs sm:text-sm">{name}</p>
-          <p className="text-sm sm:text-base">${price}</p>
+        <div className="px-4 pb-3 font-medium space-y-1 text-sm">
+          <p className="truncate">{name}</p>
+          <p>${price}</p>
         </div>
       </Link>
 

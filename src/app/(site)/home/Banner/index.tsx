@@ -13,9 +13,11 @@ const Banner = () => {
         className="size-full object-cover mix-blend-overlay"
       />
 
-      <div className="absolute bottom-[11%] md:bottom-[7%] px-[4%] lg:px-[6%] text-light font-semibold text-center sm:text-left">
-        <h2 className="text-5xl md:text-6xl">Clothes that get you.</h2>
-        <p className="mt-5 text-lg md:text-2xl">Every inch made to match</p>
+      <div className="absolute bottom-[11%] md:bottom-[7%] px-[4%] lg:px-[6%] text-light text-left">
+        <h2 className="text-4xl md:text-6xl font-playfair font-semibold">
+          Clothes that get you.
+        </h2>
+        <p className="mt-6 text-lg md:text-2xl font-medium">Every inch made to match</p>
       </div>
     </section>
   );

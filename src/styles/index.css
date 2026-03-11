@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @theme {
+  --font-lora: var(--font-lora), ui-serif, Georgia, serif;
+  --font-playfair: var(--font-playfair), serif;
+
   --color-primary: #930150;
   --color-secondary: #e59e53;
 

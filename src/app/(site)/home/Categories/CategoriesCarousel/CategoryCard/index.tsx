@@ -17,13 +17,13 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
           width={500}
           height={700}
           src={image}
-          alt=""
+          alt={name}
           className="size-full rounded object-cover object-top mix-blend-multiply group-hover:scale-105 duration-350"
         />
       </figure>
 
       {/* Category name */}
-      <h3 className="h-max p-4 absolute z-10 inset-x-4 top-1/2 -translate-y-1/2 text-center truncate text-light font-semibold xl:text-xl">
+      <h3 className="h-max p-4 absolute z-10 inset-x-4 top-1/2 -translate-y-1/2 text-center truncate text-light font-semibold sm:text-lg xl:text-xl">
         {name}
       </h3>
 
