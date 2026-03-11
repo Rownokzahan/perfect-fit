@@ -1,4 +1,5 @@
 import { connectToDatabase } from "@/lib/db";
+import { toPlainObject } from "@/lib/utils/object";
 import UserStoreModel from "@/models/UserStoreModel";
 import { Id } from "@/types";
 import { DBCartItem } from "@/types/cart";
@@ -37,7 +38,7 @@ export const getUserDbCartItems = async (
         new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
     );
 
-    return cartItems as unknown as DBCartItem[];
+    return toPlainObject(cartItems) as unknown as DBCartItem[];
   } catch (err) {
     console.error(
       `[getUserCartBase] Failed to fetch cart for user ${ownerId}:`,
