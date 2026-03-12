@@ -4,11 +4,13 @@ import { ImSpinner9 } from "react-icons/im";
 interface FormSubmitButtonProps {
   label: string;
   isFormSubmitting: boolean;
+  disabled?: boolean;
 }
 
 const FormSubmitButton = ({
   label,
   isFormSubmitting,
+  disabled,
 }: FormSubmitButtonProps) => {
   if (isFormSubmitting) {
     return (
@@ -19,7 +21,7 @@ const FormSubmitButton = ({
   }
 
   return (
-    <Button type="submit" className="w-full py-3">
+    <Button type="submit" disabled={disabled} className="w-full py-3">
       {label}
     </Button>
   );

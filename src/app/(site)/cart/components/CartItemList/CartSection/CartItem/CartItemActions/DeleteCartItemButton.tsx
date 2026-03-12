@@ -2,22 +2,23 @@
 
 import { removeFromCart } from "@/actions/cart/mutations/removeFromCart";
 import { Id } from "@/types";
+import clsx from "clsx";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
 import { LuLoader, LuTrash2 } from "react-icons/lu";
 
 interface DeleteCartItemButtonProps {
   cartItemId: Id;
-  showText?: boolean;
 }
 
-const DeleteCartItemButton = ({
-  cartItemId,
-  showText = true,
-}: DeleteCartItemButtonProps) => {
+const DeleteCartItemButton = ({ cartItemId }: DeleteCartItemButtonProps) => {
   const [isPending, startTransition] = useTransition();
 
   const handleRemove = () => {
+    if (isPending) {
+      return;
+    }
+
     startTransition(async () => {
       const error = await removeFromCart(cartItemId);
 
@@ -32,15 +33,17 @@ const DeleteCartItemButton = ({
       onClick={handleRemove}
       disabled={isPending}
       aria-label="Remove item from cart"
-      className="flex items-center justify-center text-dark-light disabled:opacity-60"
+      className={clsx(
+        "sm:w-max sm:px-3 size-8 rounded-full border flex items-center justify-center",
+        "text-dark-light",
+        !isPending && "hover:text-danger hover:border-danger duration-100",
+      )}
     >
       {isPending ? <LuLoader className="animate-spin" /> : <LuTrash2 />}
 
-      {showText && (
-        <span className="ms-2 text-xs font-semibold">
-          {isPending ? "Removing" : "Remove"}
-        </span>
-      )}
+      <span className="hidden sm:inline-block text-xs ms-2">
+        Remove
+      </span>
     </button>
   );
 };

@@ -6,28 +6,23 @@ import clsx from "clsx";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
 import { FaRegHeart } from "react-icons/fa";
+import { LuLoader } from "react-icons/lu";
 
-type MoveToWishlistButtonProps =
-  | {
-      isCustomDress: true;
-      cartItemId?: never;
-      productId?: never;
-    }
-  | {
-      isCustomDress: false;
-      cartItemId: Id;
-      productId: Id;
-    };
+interface MoveToWishlistButtonProps {
+  cartItemId: Id;
+  productId: Id;
+}
 
 const MoveToWishlistButton = ({
-  isCustomDress,
   cartItemId,
   productId,
 }: MoveToWishlistButtonProps) => {
   const [isPending, startTransition] = useTransition();
 
   const handleMoveToWishlist = () => {
-    if (isCustomDress) return;
+    if (isPending) {
+      return;
+    }
 
     startTransition(async () => {
       const error = await moveToWishlist({ cartItemId, productId });
@@ -41,14 +36,18 @@ const MoveToWishlistButton = ({
   return (
     <button
       onClick={handleMoveToWishlist}
+      disabled={isPending}
+      aria-label="Move item to wishlist"
       className={clsx(
-        "text-dark-light font-semibold flex items-center justify-center",
-        isCustomDress && "opacity-50 cursor-not-allowed",
+        "sm:w-max sm:px-3 size-8 rounded-full border flex items-center justify-center",
+        "text-dark-light",
+        !isPending && "hover:text-primary hover:border-primary duration-100",
       )}
     >
-      <FaRegHeart />
-      <span className="ms-2 text-xs font-semibold">
-        {isPending ? "Moving..." : "Add To Wishlist"}
+      {isPending ? <LuLoader className="animate-spin" /> : <FaRegHeart />}
+
+      <span className="hidden sm:inline-block text-xs ms-2">
+        Move to Wislist
       </span>
     </button>
   );

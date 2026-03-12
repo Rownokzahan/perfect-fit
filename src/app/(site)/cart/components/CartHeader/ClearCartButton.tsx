@@ -9,7 +9,7 @@ const ClearCartButton = () => {
   const confirmClearCart = useConfirmActionModal();
   const [isPending, startTransition] = useTransition();
 
-  const handleClearCart = async() => {
+  const handleClearCart = async () => {
     const confirmed = await confirmClearCart({
       message: "Are you sure you want to clear your shopping bag?",
       action: "clearCart",
@@ -18,7 +18,6 @@ const ClearCartButton = () => {
     if (!confirmed) {
       return;
     }
-
 
     startTransition(async () => {
       const error = await clearCart();
@@ -33,7 +32,7 @@ const ClearCartButton = () => {
     <button
       onClick={handleClearCart}
       disabled={isPending}
-      className="mt-0.75 font-medium text-sm text-primary text-nowrap disabled:opacity-50"
+      className="h-max mt-1 uppercase text-xs text-primary font-medium underline underline-offset-2 text-nowrap disabled:opacity-50"
     >
       {isPending ? "Clearing..." : "Clear All"}
     </button>

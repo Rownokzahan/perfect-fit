@@ -47,7 +47,7 @@ const Button = ({
 }: ButtonProps) => {
   const classes = clsx(
     className,
-    "py-2 px-6 border rounded-sm text-center font-semibold capitalize grid place-items-center",
+    "py-2 px-6 border rounded-sm text-center capitalize flex items-center justify-center",
     "transition-all ease-in-out duration-300",
     "disabled:bg-neutral-300 disabled:text-uiWhite disabled:border-neutral-300",
 

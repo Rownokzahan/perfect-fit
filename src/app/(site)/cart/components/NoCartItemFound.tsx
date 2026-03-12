@@ -7,7 +7,7 @@ const NoCartItemFound = () => {
       <div className="ui-container text-center">
         <TbShoppingBagSearch className="mx-auto text-6xl" />
 
-        <h3 className="mt-4 font-semibold text-xl">
+        <h3 className="mt-4 text-xl">
           Your shopping bag is empty
         </h3>
 

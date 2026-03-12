@@ -1,17 +1,20 @@
 import { CartItemType } from "@/types/cart";
-import CartItemListDesktop from "./CartItemListDesktop";
-import CartItemListMobile from "./CartItemListMobile";
+import CartSection from "./CartSection";
 
 interface CartItemListProps {
-  cartItems:CartItemType[];
+  availableItems: CartItemType[];
+  unavailableItems: CartItemType[];
 }
 
-const CartItemList = ({ cartItems }: CartItemListProps) => {
+const CartItemList = ({
+  availableItems,
+  unavailableItems,
+}: CartItemListProps) => {
   return (
-    <>
-      <CartItemListDesktop cartItems={cartItems} />
-      <CartItemListMobile cartItems={cartItems} />
-    </>
+    <div className="space-y-12">
+      <CartSection isAvilablelist={false} items={unavailableItems} />
+      <CartSection isAvilablelist={true} items={availableItems} />
+    </div>
   );
 };
 
