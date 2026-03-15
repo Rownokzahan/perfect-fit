@@ -3,51 +3,13 @@ import { CartItemType } from "@/types/cart";
 import clsx from "clsx";
 import { BsSlash } from "react-icons/bs";
 import { TbChevronDown } from "react-icons/tb";
+import AvailabilityBadge from "./AvailabilityBadge";
 
 interface ItemInfoProps {
   item: CartItemType;
   showCustomizations: boolean;
   toggleCustomizations: () => void;
 }
-
-// Availability status badge component for better reusability
-const AvailabilityBadge = ({
-  availability,
-}: {
-  availability: CartItemType["availability"];
-}) => {
-  if (availability === "available") return null;
-
-  const config = {
-    out_of_stock: {
-      textColor: "text-warning",
-      dotColor: "bg-warning",
-      label: "Out of stock",
-    },
-    no_longer_exists: {
-      textColor: "text-danger",
-      dotColor: "bg-danger",
-      label: "No longer exists",
-    },
-  };
-
-  const status = config[availability];
-  if (!status) return null;
-
-  return (
-    <div
-      className={clsx(
-        "w-max mt-3 px-3 py-1.5 rounded-full flex items-center gap-2 bg-light-light",
-        status.textColor,
-      )}
-      role="status"
-      aria-live="polite"
-    >
-      <span className={clsx("size-2 rounded-full", status.dotColor)} />
-      <span className="text-xs font-medium">{status.label}</span>
-    </div>
-  );
-};
 
 const ItemInfo = ({
   item,
