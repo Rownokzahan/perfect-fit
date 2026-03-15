@@ -18,10 +18,11 @@ const OrderSummaryCardRow = ({
         className
       )}
     >
-      <p className="font-medium">{label}</p>
+      <p className="">{label}</p>
       <p className="text-xs">{value}</p>
     </div>
   );
 };
 
 export default OrderSummaryCardRow;
+

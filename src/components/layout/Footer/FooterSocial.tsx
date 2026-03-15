@@ -27,7 +27,7 @@ const socialLinks = [
 const FooterSocial = () => {
   return (
     <div className="space-y-3">
-      <h3 className="font-medium text-light">Follow Us</h3>
+      <h3 className="text-light">Follow Us</h3>
 
       <div className="flex gap-4 items-center">
         {socialLinks.map((link, index) => {
@@ -52,3 +52,4 @@ const FooterSocial = () => {
 };
 
 export default FooterSocial;
+

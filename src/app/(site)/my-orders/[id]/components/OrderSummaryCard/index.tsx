@@ -26,7 +26,7 @@ const OrderSummaryCard = ({ order }: OrderSummaryCardProps) => {
   return (
     <div className="p-4 sm:p-6 rounded bg-light-light">
       <div className="flex justify-between items-center gap-3">
-        <h3 className="font-semibold sm:text-lg">Order Summary</h3>
+        <h3 className="sm:text-lg">Order Summary</h3>
         <OrderStatusBadge status={status} />
       </div>
 
@@ -41,3 +41,4 @@ const OrderSummaryCard = ({ order }: OrderSummaryCardProps) => {
 };
 
 export default OrderSummaryCard;
+

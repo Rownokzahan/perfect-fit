@@ -68,7 +68,7 @@ const AuthContent = () => {
         {message}{" "}
         <button
           onClick={() => setCurrentView(targetView)}
-          className="text-primary font-medium animated-underline py-px!"
+          className="text-primary animated-underline py-px!"
         >
           {linkText}
         </button>
@@ -78,3 +78,4 @@ const AuthContent = () => {
 };
 
 export default AuthContent;
+

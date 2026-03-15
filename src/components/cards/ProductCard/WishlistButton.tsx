@@ -60,7 +60,7 @@ const WishlistButton = ({ productId, isWishlisted }: WishlistButtonProps) => {
         )}
       >
         <div className="relative">
-          <div className="px-2 py-1 rounded shadow bg-light-light/80 text-sm text-dark-light font-semibold">
+          <div className="px-2 py-1 rounded shadow bg-light-light/80 text-sm text-dark-light">
             {isPending
               ? "Updating..."
               : isWishlisted
@@ -76,3 +76,4 @@ const WishlistButton = ({ productId, isWishlisted }: WishlistButtonProps) => {
 };
 
 export default WishlistButton;
+

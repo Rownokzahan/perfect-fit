@@ -8,7 +8,7 @@ const CustomDressPage = () => {
   return (
     <div className="max-w-5xl ui-container mt-8 mb-12">
       <div className="mb-8 space-y-2">
-        <h3 className="font-semibold text-2xl text-center">
+        <h3 className="text-2xl text-center">
           Design Your Own Dress
         </h3>
         <p className="text-center text-sm text-dark-light">
@@ -23,3 +23,4 @@ const CustomDressPage = () => {
 };
 
 export default CustomDressPage;
+

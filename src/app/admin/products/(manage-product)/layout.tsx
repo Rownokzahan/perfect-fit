@@ -10,7 +10,7 @@ const ManageProductLayout = ({ children }: ManageProductLayoutProps) => {
     <>
       <Link
         href={"/admin/products"}
-        className="mb-4 hidden sm:flex items-center font-semibold hover:text-primary duration-300"
+        className="mb-4 hidden sm:flex items-center hover:text-primary duration-300"
       >
         <IoIosArrowBack className="text-lg" />
         Back to products
@@ -26,3 +26,4 @@ const ManageProductLayout = ({ children }: ManageProductLayoutProps) => {
 };
 
 export default ManageProductLayout;
+

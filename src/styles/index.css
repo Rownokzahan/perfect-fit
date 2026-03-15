@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-lora: var(--font-lora), ui-serif, Georgia, serif;
-  --font-playfair: var(--font-playfair), serif;
+  --font-body: var(--font-body);
+  --font-heading: var(--font-heading);
 
   --color-primary: #930150;
   --color-secondary: #e59e53;
@@ -34,6 +34,21 @@
   button:disabled,
   [role="button"]:disabled {
     cursor: default;
+  }
+
+  body {
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+    font-weight: 500;
   }
 }
 

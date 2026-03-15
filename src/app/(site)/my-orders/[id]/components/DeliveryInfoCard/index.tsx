@@ -12,23 +12,23 @@ const DeliveryInfoCard = ({ deliveryInfo }: DeliveryInfoCardProps) => {
 
   return (
     <div className="p-4 sm:p-6 rounded bg-light-light">
-      <h3 className="font-semibold sm:text-lg">Delivery Information</h3>
+      <h3 className="sm:text-lg">Delivery Information</h3>
 
       <div className="mt-2 text-sm text-dark-light space-y-1">
         <p>
-          <span className="font-medium">Name: </span>
+          <span className="">Name: </span>
           {name}
         </p>
         <p>
-          <span className="font-medium">Email: </span>
+          <span className="">Email: </span>
           {email}
         </p>
         <p>
-          <span className="font-medium">Phone: </span>
+          <span className="">Phone: </span>
           {phoneNumber}
         </p>
         <p>
-          <span className="font-medium">Address: </span>
+          <span className="">Address: </span>
           {deliveryAddress}
         </p>
       </div>
@@ -37,3 +37,4 @@ const DeliveryInfoCard = ({ deliveryInfo }: DeliveryInfoCardProps) => {
 };
 
 export default DeliveryInfoCard;
+

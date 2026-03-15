@@ -5,7 +5,7 @@ const ProductCardSkeleton = () => {
         <div className="size-full bg-gray-200 object-cover object-top rounded-t-sm animate-pulse" />
       </div>
 
-      <div className="h-14 sm:h-15 px-4 pb-3 font-medium space-y-3">
+      <div className="h-14 sm:h-15 px-4 pb-3 space-y-3">
         <div className="h-4 rounded-sm bg-gray-200 animate-pulse" />
         <div className="h-4 w-16 rounded-sm bg-gray-200 animate-pulse" />
       </div>
@@ -14,3 +14,4 @@ const ProductCardSkeleton = () => {
 };
 
 export default ProductCardSkeleton;
+

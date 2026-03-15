@@ -24,7 +24,7 @@ const CategoryTableRow = ({ category }: CategoryTableRowProps) => {
           />
         </div>
       </td>
-      <td className="px-4 py-3 font-medium text-dark/65">{name}</td>
+      <td className="px-4 py-3 text-dark/65">{name}</td>
 
       <td className="px-4 py-3">
         <div className="flex items-center justify-center gap-2 text-lg text-dark-light">
@@ -43,3 +43,4 @@ const CategoryTableRow = ({ category }: CategoryTableRowProps) => {
 };
 
 export default CategoryTableRow;
+

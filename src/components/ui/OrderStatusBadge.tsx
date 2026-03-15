@@ -30,7 +30,7 @@ const OrderStatusBadge = ({ status }: OrderStatusBadgeProps) => {
   return (
     <div
       className={clsx(
-        "h-max px-3 py-px rounded-2xl border border-gray-100 text-sm font-semibold",
+        "h-max px-3 py-px rounded-2xl border border-gray-100 text-sm",
         className
       )}
     >

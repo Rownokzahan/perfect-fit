@@ -26,13 +26,13 @@ const AdminProductTableRow = ({ product }: AdminProductTableRowProps) => {
           />
         </div>
       </td>
-      <td className="px-4 py-3 font-medium text-dark/65">{name}</td>
-      <td className="px-4 py-3 font-medium text-dark/65">{stock}</td>
-      <td className="px-4 py-3 font-semibold">${price}</td>
+      <td className="px-4 py-3 text-dark/65">{name}</td>
+      <td className="px-4 py-3 text-dark/65">{stock}</td>
+      <td className="px-4 py-3">${price}</td>
 
       <td className="px-4 py-3">
         {status === "archived" ? (
-          <span className="px-2 py-1 text-xs font-medium rounded bg-gray-200 text-gray-600">
+          <span className="px-2 py-1 text-xs rounded bg-gray-200 text-gray-600">
             Archived
           </span>
         ) : (
@@ -64,3 +64,4 @@ const AdminProductTableRow = ({ product }: AdminProductTableRowProps) => {
 };
 
 export default AdminProductTableRow;
+

@@ -16,7 +16,7 @@ const AuthViewHeader = ({ title, subtitle }: AuthViewHeaderProps) => {
       />
 
       <div className="absolute bottom-4 px-6 z-10 text-white">
-        <h3 className="text-2xl font-medium">{title}</h3>
+        <h3 className="text-2xl">{title}</h3>
         <p className="text-uiBlack-light text-sm">{subtitle}</p>
       </div>
     </div>
@@ -24,3 +24,4 @@ const AuthViewHeader = ({ title, subtitle }: AuthViewHeaderProps) => {
 };
 
 export default AuthViewHeader;
+

@@ -10,7 +10,7 @@ const AddToCartModal = () => {
     >
       <IoCheckmarkCircleOutline className="mb-2 text-5xl mx-auto" />
 
-      <h3 className="text-center text-2xl font-medium">Added To Cart</h3>
+      <h3 className="text-center text-2xl">Added To Cart</h3>
 
       <div className="mt-6 flex flex-col sm:flex-row gap-3">
         <Button
@@ -30,3 +30,4 @@ const AddToCartModal = () => {
 };
 
 export default AddToCartModal;
+

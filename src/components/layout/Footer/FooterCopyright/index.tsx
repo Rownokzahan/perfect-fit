@@ -16,7 +16,7 @@ const FooterCopyright = () => {
           <a
             href="https://rownok-zahan-rupa.netlify.app/"
             target="_blank"
-            className="animated-underline hover:text-primary transition-colors duration-300 font-medium"
+            className="animated-underline hover:text-primary transition-colors duration-300"
           >
             Rownok Zahan Rupa
           </a>
@@ -27,3 +27,4 @@ const FooterCopyright = () => {
 };
 
 export default FooterCopyright;
+

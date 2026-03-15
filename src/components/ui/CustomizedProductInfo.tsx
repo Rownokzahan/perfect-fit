@@ -23,7 +23,7 @@ const CustomizedProductInfo = ({
 
   return (
     <div className="min-w-0 space-y-2">
-      <h3 className="font-semibold truncate">{name}</h3>
+      <h3 className="truncate">{name}</h3>
 
       <div className="ps-1 space-y-1 text-xs text-dark-light">
         <p>Bodice: {bodiceType}</p>
@@ -41,7 +41,7 @@ const CustomizedProductInfo = ({
 
       {request && (
         <div className="space-y-0.5">
-          <h3 className="text-xs font-medium">Request/Info</h3>
+          <h3 className="text-xs">Request/Info</h3>
           <div className="ps-1 text-xs text-dark-light">
             <p>{request}</p>
           </div>
@@ -52,3 +52,4 @@ const CustomizedProductInfo = ({
 };
 
 export default CustomizedProductInfo;
+

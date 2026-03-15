@@ -15,7 +15,7 @@ const MyOrdersPage = async () => {
 
   return (
     <div className="ui-container mt-8 mb-12">
-      <h2 className="mb-8 text-2xl font-semibold text-center">My Orders</h2>
+      <h2 className="mb-8 text-2xl text-center">My Orders</h2>
 
       <div className="space-y-4">
         {orders.map((order) => (
@@ -27,3 +27,4 @@ const MyOrdersPage = async () => {
 };
 
 export default MyOrdersPage;
+

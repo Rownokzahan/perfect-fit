@@ -7,7 +7,7 @@ const NoOrderFound = () => {
       <div className="ui-container text-center">
         <TbShoppingBag className="mx-auto text-6xl" />
 
-        <h3 className="mt-4 font-semibold text-xl">
+        <h3 className="mt-4 text-xl">
           Your currently have no orders
         </h3>
 
@@ -24,3 +24,4 @@ const NoOrderFound = () => {
 };
 
 export default NoOrderFound;
+

@@ -10,7 +10,7 @@ const TermsAndConditionsPage = () => {
   return (
     <div className="ui-container mb-12 mt-8 sm:mt-12 space-y-8">
       <div className="text-center space-y-2">
-        <h2 className="text-2xl font-semibold">Terms and Conditions</h2>
+        <h2 className="text-2xl">Terms and Conditions</h2>
         <p className="text-sm text-dark-light">
           Effective Date: July 20, 2025 &nbsp;|&nbsp; Last Updated: July 20,
           2025
@@ -18,7 +18,7 @@ const TermsAndConditionsPage = () => {
       </div>
 
       <section className="space-y-2">
-        <h2 className="text-lg font-semibold">1. Use of Our Website</h2>
+        <h2 className="text-lg">1. Use of Our Website</h2>
         <p>
           You agree to use this website only for lawful purposes. You must not:
         </p>
@@ -32,7 +32,7 @@ const TermsAndConditionsPage = () => {
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-lg font-semibold">2. Product Information</h2>
+        <h2 className="text-lg">2. Product Information</h2>
         <p>
           We strive to display our products (including customized dresses) as
           accurately as possible. However:
@@ -48,7 +48,7 @@ const TermsAndConditionsPage = () => {
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-lg font-semibold">3. Orders and Payments</h2>
+        <h2 className="text-lg">3. Orders and Payments</h2>
         <p>
           By placing an order, you confirm that all details provided are
           accurate. All prices are in your local currency and include taxes
@@ -64,7 +64,7 @@ const TermsAndConditionsPage = () => {
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-lg font-semibold">4. Shipping and Delivery</h2>
+        <h2 className="text-lg">4. Shipping and Delivery</h2>
         <p>
           We offer shipping to selected locations. Delivery timelines are
           estimates and may vary due to third-party couriers.
@@ -79,20 +79,20 @@ const TermsAndConditionsPage = () => {
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-lg font-semibold">5. Returns and Exchanges</h2>
-        <p className="font-medium mt-2">Standard Products:</p>
+        <h2 className="text-lg">5. Returns and Exchanges</h2>
+        <p className="mt-2">Standard Products:</p>
         <ul className="list-disc list-inside mt-1 ml-4">
           <li>Returns accepted within 7 days of delivery.</li>
           <li>Items must be unused and in original condition.</li>
         </ul>
-        <p className="font-medium mt-4">Custom Products:</p>
+        <p className="mt-4">Custom Products:</p>
         <ul className="list-disc list-inside mt-1 ml-4">
           <li>Not eligible for return or exchange unless defective.</li>
         </ul>
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-lg font-semibold">6. Intellectual Property</h2>
+        <h2 className="text-lg">6. Intellectual Property</h2>
         <p>
           All content on this website—including images, text, logos, and
           designs—is the property of [Your Store Name] or its licensors and is
@@ -101,7 +101,7 @@ const TermsAndConditionsPage = () => {
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-lg font-semibold">7. Limitation of Liability</h2>
+        <h2 className="text-lg">7. Limitation of Liability</h2>
         <p>We are not liable for:</p>
         <ul className="list-disc list-inside mt-2 space-y-1">
           <li>Indirect or consequential damages.</li>
@@ -111,7 +111,7 @@ const TermsAndConditionsPage = () => {
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-lg font-semibold">8. Changes to These Terms</h2>
+        <h2 className="text-lg">8. Changes to These Terms</h2>
         <p>
           We reserve the right to update these Terms at any time. Changes will
           be posted on this page with a revised date. Continued use of the site
@@ -120,7 +120,7 @@ const TermsAndConditionsPage = () => {
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-lg font-semibold">9. Contact Us</h2>
+        <h2 className="text-lg">9. Contact Us</h2>
         <p className="mb-2">If you have questions, contact us at:</p>
 
         <div className="ps-px">
@@ -143,3 +143,4 @@ const TermsAndConditionsPage = () => {
 };
 
 export default TermsAndConditionsPage;
+

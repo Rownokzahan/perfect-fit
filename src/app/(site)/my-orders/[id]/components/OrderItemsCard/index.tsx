@@ -11,7 +11,7 @@ const OrderItemsCard = ({ orderItems }: OrderItemsCardProps) => {
   return (
     <div className="p-4 sm:p-6 pb-0 sm:pb-0 rounded bg-light-light">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold sm:text-lg">Order Items</h3>
+        <h3 className="sm:text-lg">Order Items</h3>
         <p className="text-sm text-dark-light">{orderItems.length} items</p>
       </div>
 
@@ -39,17 +39,17 @@ const OrderItemsCard = ({ orderItems }: OrderItemsCardProps) => {
                     name={name}
                   />
 
-                  <div className="sm:hidden ms-1 mt-2 flex justify-between text-xs font-medium text-dark-light">
+                  <div className="sm:hidden ms-1 mt-2 flex justify-between text-xs text-dark-light">
                     <p>QTY: {quantity}</p>
                     <p>${subtotal}</p>
                   </div>
                 </div>
 
-                <p className="hidden sm:block font-medium text-sm text-dark-light text-nowrap justify-self-center">
+                <p className="hidden sm:block text-sm text-dark-light text-nowrap justify-self-center">
                   <span className="text-xs">X</span> {quantity}
                 </p>
 
-                <p className="hidden sm:block font-medium text-dark-light text-sm justify-self-end">
+                <p className="hidden sm:block text-dark-light text-sm justify-self-end">
                   ${subtotal}
                 </p>
               </div>
@@ -62,3 +62,4 @@ const OrderItemsCard = ({ orderItems }: OrderItemsCardProps) => {
 };
 
 export default OrderItemsCard;
+

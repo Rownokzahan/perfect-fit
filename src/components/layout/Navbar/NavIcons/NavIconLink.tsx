@@ -36,7 +36,7 @@ const NavIconLink = ({
 
       {count > 0 && (
         <div className="absolute shadow -top-1 -right-1 size-4 rounded-full bg-primary grid">
-          <span className="place-self-center text-light text-xs font-medium">
+          <span className="place-self-center text-light text-xs">
             {count}
           </span>
         </div>
@@ -46,3 +46,4 @@ const NavIconLink = ({
 };
 
 export default NavIconLink;
+

@@ -75,7 +75,7 @@ const DeliveryInfoForm = ({ userName, userEmail }: DeliveryInfoFormProps) => {
           <div className="w-xs py-6 px-4 sm:p-8 rounded bg-light">
             <RiLoader4Fill className="mb-4 text-5xl mx-auto text-primary animate-spin" />
 
-            <h3 className="text-center text-xl font-medium">
+            <h3 className="text-center text-xl">
               Placing your order...
             </h3>
           </div>
@@ -83,7 +83,7 @@ const DeliveryInfoForm = ({ userName, userEmail }: DeliveryInfoFormProps) => {
       )}
 
       <div className="p-4 sm:p-6 rounded bg-light-light space-y-4">
-        <h3 className="font-semibold sm:text-lg">Delivery Info</h3>
+        <h3 className="sm:text-lg">Delivery Info</h3>
 
         <form
           id="place-order-form"
@@ -142,3 +142,4 @@ const DeliveryInfoForm = ({ userName, userEmail }: DeliveryInfoFormProps) => {
 };
 
 export default DeliveryInfoForm;
+

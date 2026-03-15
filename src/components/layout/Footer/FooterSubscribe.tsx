@@ -1,7 +1,7 @@
 const FooterSubscribe = () => {
   return (
     <div className="space-y-3">
-      <h3 className="font-medium text-light">Subscribe Us</h3>
+      <h3 className="text-light">Subscribe Us</h3>
 
       <form className="flex flex-wrap items-center text-sm">
         <input
@@ -11,7 +11,7 @@ const FooterSubscribe = () => {
         />
         <button
           type="submit"
-          className="p-2 border border-light bg-light text-dark hover:border-primary hover:bg-primary hover:text-light font-semibold duration-300"
+          className="p-2 border border-light bg-light text-dark hover:border-primary hover:bg-primary hover:text-light duration-300"
         >
           Subscribe
         </button>
@@ -21,3 +21,4 @@ const FooterSubscribe = () => {
 };
 
 export default FooterSubscribe;
+

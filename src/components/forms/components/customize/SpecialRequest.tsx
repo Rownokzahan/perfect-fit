@@ -10,7 +10,7 @@ interface SpecialRequestProps {
 const SpecialRequest = ({ register, error }: SpecialRequestProps) => {
   return (
     <div className="space-y-4 bg-light">
-      <h3 className="font-medium">Any Special Request/Info</h3>
+      <h3 className="">Any Special Request/Info</h3>
 
       <InputField
         id="request"
@@ -25,3 +25,4 @@ const SpecialRequest = ({ register, error }: SpecialRequestProps) => {
 };
 
 export default SpecialRequest;
+

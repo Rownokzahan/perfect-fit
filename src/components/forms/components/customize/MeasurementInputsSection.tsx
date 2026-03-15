@@ -14,7 +14,7 @@ const MeasurementInputsSection = ({
   return (
     <div className="space-y-4">
       <div className="space-y-1">
-        <h3 className="font-medium">Measurements</h3>
+        <h3 className="">Measurements</h3>
         <p className="text-sm text-dark-light">
           Measurements must be provided in inches
         </p>
@@ -70,3 +70,4 @@ const MeasurementInputsSection = ({
 };
 
 export default MeasurementInputsSection;
+

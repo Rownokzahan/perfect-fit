@@ -90,7 +90,7 @@ const UserIconButton = () => {
 
           <button
             onClick={() => openConfirmLogoutModal()}
-            className="w-full px-4 py-2 rounded-b text-left font-medium text-sm text-red-600 hover:bg-light-light"
+            className="w-full px-4 py-2 rounded-b text-left text-sm text-red-600 hover:bg-light-light"
           >
             Logout
           </button>
@@ -101,3 +101,4 @@ const UserIconButton = () => {
 };
 
 export default UserIconButton;
+

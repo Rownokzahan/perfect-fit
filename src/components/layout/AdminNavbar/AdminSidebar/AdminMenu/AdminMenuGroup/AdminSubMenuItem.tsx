@@ -22,7 +22,7 @@ const AdminSubMenuItem = ({ subItem, isActive }: AdminSubMenuItemProps) => {
         prefetch={false}
         className={clsx(
           "block py-2 px-3 transition-colors",
-          isActive && "text-primary font-medium",
+          isActive && "text-primary",
         )}
       >
         {name}

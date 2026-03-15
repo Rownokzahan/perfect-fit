@@ -33,7 +33,7 @@ const items = [
 
 const WhyUs = () => {
   return (
-    <section className="bg-dark text-light">
+    <section className="bg-dark">
       <div className="ui-container py-14 grid grid-cols-2 md:grid-cols-4 gap-4">
         {items?.map((item, index) => (
           <WhyUsCard key={index} item={item} />

@@ -10,7 +10,7 @@ const ContactPage = () => {
   return (
     <div className="ui-container mt-8 mb-12">
       <section className="mb-12 text-center space-y-1">
-        <h3 className="text-center font-bold text-3xl">Contact Us</h3>
+        <h3 className="text-center text-3xl">Contact Us</h3>
         <p className="text-dark-light text-sm">
           We would love to hear from you
         </p>
@@ -40,7 +40,7 @@ const ContactPage = () => {
         </div>
 
         <div className="md:w-3/7 space-y-6 bg-light-light p-8">
-          <h3 className="text-lg font-bold">Send Us A Message</h3>
+          <h3 className="text-lg">Send Us A Message</h3>
           <ContactForm />
         </div>
       </section>
@@ -59,3 +59,4 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+

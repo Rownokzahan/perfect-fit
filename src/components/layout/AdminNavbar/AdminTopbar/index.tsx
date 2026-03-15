@@ -23,7 +23,7 @@ const AdminTopbar = ({ openSidebar }: AdminTopbarProps) => {
         <RxHamburgerMenu className="lg:hidden text-2xl" />
       </button>
 
-      <h1 className="ms-3 text-lg md:ms-60 md:text-xl font-bold flex-1">
+      <h1 className="ms-3 text-lg md:ms-60 md:text-xl flex-1">
         {pageName}
       </h1>
 
@@ -31,10 +31,10 @@ const AdminTopbar = ({ openSidebar }: AdminTopbarProps) => {
         <PiUserCircleDuotone size={42} className="text-dark/20" />
 
         <div className="space-y-px">
-          <h3 className="max-w-24 truncate font-medium text-sm">
+          <h3 className="max-w-24 truncate text-sm">
             {data?.user.name}
           </h3>
-          <p className="ms-px text-xs font-semibold text-dark-light">Admin</p>
+          <p className="ms-px text-xs text-dark-light">Admin</p>
         </div>
       </div>
     </header>
@@ -42,3 +42,4 @@ const AdminTopbar = ({ openSidebar }: AdminTopbarProps) => {
 };
 
 export default AdminTopbar;
+

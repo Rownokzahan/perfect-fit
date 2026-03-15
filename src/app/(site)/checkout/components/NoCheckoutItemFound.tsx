@@ -7,7 +7,7 @@ const NoCheckoutItemFound = () => {
       <div className="ui-container text-center">
         <TbShoppingBagX className="mx-auto text-6xl" />
 
-        <h3 className="mt-4 font-semibold text-xl">No items to checkout</h3>
+        <h3 className="mt-4 text-xl">No items to checkout</h3>
 
         <p className="mt-3 text-dark-light">
           Looks like you haven&apos;t added any dresses to your bag for
@@ -23,3 +23,4 @@ const NoCheckoutItemFound = () => {
 };
 
 export default NoCheckoutItemFound;
+

@@ -22,7 +22,7 @@ const StyleSelector = ({
   return (
     <div className="w-full max-w-fit space-y-4">
       <div className="flex justify-between items-center">
-        <h3 className="font-medium">{title}</h3>
+        <h3 className="">{title}</h3>
 
         {/* Display Error message if there is any */}
         {error && (
@@ -65,3 +65,4 @@ const StyleSelector = ({
 };
 
 export default StyleSelector;
+

@@ -10,7 +10,7 @@ const siteLinks = [
 const FooterSiteLinks = () => {
   return (
     <div className="space-y-2">
-      <h3 className="font-medium text-light">Site Links</h3>
+      <h3 className="text-light">Site Links</h3>
 
       <div className="grid gap-1 text-sm">
         {siteLinks.map(({ label, href }) => (
@@ -24,3 +24,4 @@ const FooterSiteLinks = () => {
 };
 
 export default FooterSiteLinks;
+

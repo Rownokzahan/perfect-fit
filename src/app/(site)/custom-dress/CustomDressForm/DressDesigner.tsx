@@ -17,7 +17,7 @@ const DressDesigner = ({ register, watch, errors }: DressDesignerProps) => {
       <div className="sm:order-2 sm:-mx-16 lg:-mx-8">
         <CustomDressPreview bodice={bodice} sleeve={sleeve} skirt={skirt} />
 
-        <h3 className="text-xl text-center font-medium">$50</h3>
+        <h3 className="text-xl text-center">$50</h3>
       </div>
 
       <CustomizeStyleSection
@@ -30,3 +30,4 @@ const DressDesigner = ({ register, watch, errors }: DressDesignerProps) => {
 };
 
 export default DressDesigner;
+

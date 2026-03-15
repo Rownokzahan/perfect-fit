@@ -14,10 +14,10 @@ const Banner = () => {
       />
 
       <div className="absolute bottom-[11%] md:bottom-[7%] px-[4%] lg:px-[6%] text-light text-left">
-        <h2 className="text-4xl md:text-6xl font-playfair font-semibold">
+        <h2 className="text-4xl md:text-6xl">
           Clothes that get you.
         </h2>
-        <p className="mt-6 text-lg md:text-2xl font-medium">Every inch made to match</p>
+        <p className="mt-5 text-lg">Every inch made to match</p>
       </div>
     </section>
   );

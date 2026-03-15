@@ -36,7 +36,7 @@ const CategoryForm = ({
 
   return (
     <>
-      <h3 className="text-2xl text-center font-semibold">{label}</h3>
+      <h3 className="text-2xl text-center">{label}</h3>
 
       <form
         onSubmit={handleSubmit((data) => onSubmit(data, reset))}
@@ -70,3 +70,4 @@ const CategoryForm = ({
 };
 
 export default CategoryForm;
+

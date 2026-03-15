@@ -10,7 +10,7 @@ const OrderSuccessModal = () => {
     >
       <IoCheckmarkCircleOutline className="mb-2 text-5xl mx-auto" />
 
-      <h3 className="text-center text-xl font-medium">
+      <h3 className="text-center text-xl">
         Your order has been placed sucessfully!
       </h3>
 
@@ -32,3 +32,4 @@ const OrderSuccessModal = () => {
 };
 
 export default OrderSuccessModal;
+

@@ -21,14 +21,14 @@ const OrderCard = ({ order }: OrderCardProps) => {
         <OrderCardImage orderItems={items} />
 
         <div className="flex-1 min-w-0 space-y-2 text-sm">
-          <h6 className="font-semibold truncate sm:text-base">
+          <h6 className="truncate sm:text-base">
             Order Id #{_id}
           </h6>
-          <div className="text-dark-light font-medium space-y-1">
+          <div className="text-dark-light space-y-1">
             <p className="truncate">{itemNames}</p>
             <p>Items: {items.length}</p>
           </div>
-          <h6 className="font-semibold">${totalPrice}</h6>
+          <h6 className="">${totalPrice}</h6>
         </div>
       </div>
 
@@ -40,3 +40,4 @@ const OrderCard = ({ order }: OrderCardProps) => {
 };
 
 export default OrderCard;
+

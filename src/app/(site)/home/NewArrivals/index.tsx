@@ -5,7 +5,7 @@ import NewArrivalProductsSkeleton from "./NewArrivalProducts/NewArrivalProductsS
 const NewArrivals = () => {
   return (
     <section className="ui-container my-16">
-      <h3 className="mb-10 text-2xl sm:text-3xl font-semibold font-playfair text-center">
+      <h3 className="mb-10 text-2xl sm:text-3xl text-center">
         New <span className="text-primary">Arrivals</span>
       </h3>
 
@@ -17,3 +17,4 @@ const NewArrivals = () => {
 };
 
 export default NewArrivals;
+

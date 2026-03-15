@@ -10,7 +10,7 @@ const termsLinks = [
 const FooterTermsLinks = () => {
   return (
     <div className="space-y-2">
-      <h3 className="font-medium text-light">Terms & Conditons</h3>
+      <h3 className="text-light">Terms & Conditons</h3>
 
       <div className="grid gap-1 text-sm">
         {termsLinks.map((label) => (
@@ -24,3 +24,4 @@ const FooterTermsLinks = () => {
 };
 
 export default FooterTermsLinks;
+

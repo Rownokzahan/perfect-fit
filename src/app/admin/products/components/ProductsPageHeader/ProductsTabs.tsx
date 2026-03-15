@@ -32,7 +32,7 @@ const ProductsTabs = () => {
             key={tab.value}
             onClick={() => setQueryParam("status", tab.value)}
             className={clsx(
-              "flex items-center justify-center gap-2 px-4 py-2 rounded-md font-medium text-sm transition-all duration-200",
+              "flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm transition-all duration-200",
               isActive
                 ? "bg-primary/90 text-white"
                 : "text-dark-light hover:text-dark",

@@ -23,9 +23,9 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
       </figure>
 
       {/* Category name */}
-      <h3 className="h-max p-4 absolute z-10 inset-x-4 top-1/2 -translate-y-1/2 text-center truncate text-light font-semibold sm:text-lg xl:text-xl">
+      <p className="h-max p-4 absolute z-10 inset-x-4 top-1/2 -translate-y-1/2 text-center truncate text-light xl:text-lg">
         {name}
-      </h3>
+      </p>
 
       {/* Overlay effect on active */}
       <div className="absolute inset-x-4 xl:inset-x-12 inset-y-[38%] group-active:inset-0 bg-dark/40 group-active:bg-dark/50 duration-350" />
@@ -34,3 +34,4 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
 };
 
 export default CategoryCard;
+

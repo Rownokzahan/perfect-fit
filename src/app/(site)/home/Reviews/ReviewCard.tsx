@@ -10,15 +10,15 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
   const { image, name, comment, rating } = review || {};
 
   return (
-    <article className="pt-9 ps-9 pe-px h-full relative">
+    <article className="pt-7 ps-7 pe-px h-full relative">
       <div className="relative h-full p-7 shadow rounded bg-light-light flex flex-col justify-between">
-        <p className="text-pretty text-sm md:text-base text-dark-light">{comment}</p>
+        <p className="text-pretty text-sm text-dark-light">{comment}</p>
 
         <div className="mt-4 space-y-1">
-          <h3 className="text-lg font-semibold">{name}</h3>
+          <h3>{name}</h3>
           <div className="text-primary flex items-center gap-2">
             {[...Array(rating)].map((_, index) => (
-              <BsStarFill key={index} />
+              <BsStarFill size={14} key={index} />
             ))}
           </div>
         </div>
@@ -29,7 +29,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
         height={90}
         src={image}
         alt={name}
-        className="absolute top-0 left-2 size-17 rounded-full"
+        className="absolute top-0 left-2 size-14 rounded-full"
       />
 
       {/* Decorative image */}
@@ -37,7 +37,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
         width={104}
         height={80}
         src={"/images/reviewCircle.avif"}
-        className="absolute w-19 h-18.75 top-0 left-0"
+        className="absolute w-16 h-15 top-0 left-0"
         alt=""
       />
 
@@ -54,3 +54,4 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
 };
 
 export default ReviewCard;
+

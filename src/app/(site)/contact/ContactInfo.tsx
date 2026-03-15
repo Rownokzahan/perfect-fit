@@ -8,7 +8,7 @@ const ContactInfo = () => {
   return (
     <div className="flex flex-col gap-6 relative overflow-hidden">
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Email Us</h3>
+        <h3 className="text-lg">Email Us</h3>
         <p className="flex items-center gap-4">
           <AiOutlineMail className="shrink-0" />
           <span>perfectfit@email.com</span>
@@ -16,7 +16,7 @@ const ContactInfo = () => {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Call Us</h3>
+        <h3 className="text-lg">Call Us</h3>
         <p className="flex items-center gap-4">
           <IoCallOutline className="shrink-0" />
           <span>+880 1234567890</span>
@@ -24,7 +24,7 @@ const ContactInfo = () => {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Visit Us</h3>
+        <h3 className="text-lg">Visit Us</h3>
         <p className="flex items-center gap-4">
           <LuMapPin className="shrink-0" />
           <span>123 Main Street, City, Country</span>
@@ -44,7 +44,7 @@ const ContactInfo = () => {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">Connect with Us</h3>
+        <h3 className="text-lg">Connect with Us</h3>
         <div className="flex items-center gap-4">
           <SlSocialFacebook />
           <SlSocialInstagram />
@@ -56,3 +56,4 @@ const ContactInfo = () => {
 };
 
 export default ContactInfo;
+

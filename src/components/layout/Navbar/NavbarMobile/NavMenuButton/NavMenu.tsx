@@ -110,7 +110,7 @@ const NavMenu = ({ isOpen, closeMenu }: NavMenuProps) => {
           <li className="px-4 py-4">
             <button
               onClick={handleLoginOrLogout}
-              className="bg-primary px-5 py-2 rounded font-semibold text-light"
+              className="bg-primary px-5 py-2 rounded text-light"
             >
               {isAuthenticated ? "Login" : "Logout"}
             </button>
@@ -122,3 +122,4 @@ const NavMenu = ({ isOpen, closeMenu }: NavMenuProps) => {
 };
 
 export default NavMenu;
+

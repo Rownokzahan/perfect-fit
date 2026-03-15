@@ -5,7 +5,7 @@ import CategoriesCarouselSkeleton from "./CategoriesCarousel/CategoriesCarouselS
 const Categories = () => {
   return (
     <section className="ui-container my-16">
-      <h3 className="mb-10 text-2xl sm:text-3xl font-semibold font-playfair text-center">
+      <h3 className="mb-10 text-2xl sm:text-3xl text-center">
         Shop By <span className="text-primary">Categories</span>
       </h3>
 
@@ -17,3 +17,4 @@ const Categories = () => {
 };
 
 export default Categories;
+

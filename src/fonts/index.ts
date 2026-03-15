@@ -1,17 +1,13 @@
-import { Playfair_Display, Lora } from "next/font/google";
+import { Lora, Karla } from "next/font/google";
 
-export const playfair = Playfair_Display({
+export const headingFont = Lora({
+  variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-playfair",
-  display: "swap", // Prevents invisible text while loading
-  fallback: ["Times New Roman", "serif"], // The "serif" fallback
+  display: "swap",
 });
 
-export const lora = Lora({
+export const bodyFont = Karla({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-lora",
   display: "swap",
-  fallback: ["serif"], // The "serif" fallback
 });

@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import "@/styles/index.css";
-import { lora, playfair } from "@/fonts";
 import { Toaster } from "react-hot-toast";
 import AuthModal from "@/components/modals/AuthModal";
 import { Suspense } from "react";
@@ -9,6 +8,7 @@ import ConfirmLogoutModal from "@/components/modals/ConfirmLogoutModal";
 import ConfirmActionModal from "@/components/modals/ConfirmActionModal";
 import OrderSuccessModal from "@/components/modals/OrderSuccessModal";
 import clsx from "clsx";
+import { bodyFont, headingFont } from "@/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -27,11 +27,8 @@ const RootLayout = ({
     <html lang="en">
       <body
         className={clsx(
-          // Global: Sets Lora as the default font for all text
-          lora.className,
-
-          // Utility: Enables CSS variable (--font-playfair) for specific "Playfair" headings
-          playfair.variable,
+          bodyFont.variable,
+          headingFont.variable,
           "bg-light antialiased text-dark",
         )}
       >

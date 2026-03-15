@@ -12,11 +12,11 @@ const YourCart = ({ cartItems }: YourCartProps) => {
   return (
     <div className="h-max p-4 sm:p-6 rounded bg-light-light">
       <div className="flex justify-between items-center">
-        <h3 className="font-semibold sm:text-lg">Your Cart</h3>
+        <h3 className="sm:text-lg">Your Cart</h3>
 
         <Link
           href="/cart"
-          className="font-semibold hover:underline text-sm text-dark-light hover:text-primary duration-300"
+          className="hover:underline text-sm text-dark-light hover:text-primary duration-300"
         >
           Edit
         </Link>
@@ -38,8 +38,8 @@ const YourCart = ({ cartItems }: YourCartProps) => {
       </div>
 
       <div className="flex justify-between items-center">
-        <p className="font-semibold">Total</p>
-        <p className="font-medium text-end">${cartTotal}</p>
+        <p className="">Total</p>
+        <p className="text-end">${cartTotal}</p>
       </div>
 
       <div className="mt-6">
@@ -52,3 +52,4 @@ const YourCart = ({ cartItems }: YourCartProps) => {
 };
 
 export default YourCart;
+
