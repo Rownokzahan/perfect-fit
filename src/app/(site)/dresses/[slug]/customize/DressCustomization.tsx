@@ -28,7 +28,13 @@ const DressCustomization = ({ dress }: DressCustomizationProps) => {
 
   const { openModal } = useModalById("addToCartModal");
 
+  const isOutOfStock = dress.stock === 0;
+
   const handleAddToCart = (data: CustomizationFormData) => {
+    if (isOutOfStock) {
+      return;
+    }
+
     const cartItem: AddToCartPayload = {
       customizations: {
         bodiceType: data.bodiceType,
@@ -59,7 +65,7 @@ const DressCustomization = ({ dress }: DressCustomizationProps) => {
 
   return (
     <div className="space-y-4">
-      <h3 className="pb-2 border-b text-xl font-medium text-dark-light">
+      <h3 className="pb-2 border-b text-xl text-dark-light">
         Change Dress Style
       </h3>
 
@@ -75,7 +81,11 @@ const DressCustomization = ({ dress }: DressCustomizationProps) => {
         <MeasurementInputsSection register={register} errors={errors} />
         <SpecialRequest register={register} error={errors?.request} />
 
-        <FormSubmitButton label="Add to Cart" isFormSubmitting={isPending} />
+        <FormSubmitButton
+          label={isOutOfStock ? "Out of Stock" : "Add to Cart"}
+          isFormSubmitting={isPending}
+          disabled={isOutOfStock}
+        />
       </form>
     </div>
   );
