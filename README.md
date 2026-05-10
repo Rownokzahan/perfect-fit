@@ -1,110 +1,137 @@
-# 👗 Perfect Fit
+# Perfect Fit
 
-**Perfect Fit** is a modern online dress customization and e-commerce platform where users can personalize their outfits with custom designs and measurements for a flawless fit.
+Perfect Fit is a dress customization and e-commerce application built with Next.js. Customers can browse products, customize dress details, add measurements, manage carts and wishlists, and place orders. The project also includes an admin area for managing products, categories, customers, and orders.
 
-🔗 [Live Site](https://perfect-fit-store.vercel.app/)
+Live site: <https://perfect-fit-store.vercel.app/>
 
----
+## Highlights
 
-## 🧰 Tech Stack
+- Browse dresses with category filters, sorting, and search.
+- Customize products with style options, measurements, and special instructions.
+- Build a custom dress with live preview updates.
+- Support guest cart flows and signed-in user flows.
+- Save wishlist items and review order history.
+- Manage catalog and store operations from the admin area.
 
-- **Framework**: [Next.js](https://nextjs.org/) with `cacheComponent` for optimized rendering
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Authentication**: [Better Auth](https://better-auth.com/) (with MongoDB)
-- **Database**: [MongoDB](https://www.mongodb.com/) via [Mongoose](https://mongoosejs.com/)
-- **Form Handling**: [React Hook Form](https://react-hook-form.com/)
-- **UI Enhancements**: [Embla Carousel](https://www.embla-carousel.com/), [React Icons](https://react-icons.github.io/react-icons/)
-- **Notifications**: [React Hot Toast](https://react-hot-toast.com/)
+## Tech Stack
 
----
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Better Auth
+- MongoDB with Mongoose
+- React Hook Form
+- Zustand
+- Embla Carousel
+- React Hot Toast
 
-## 🚀 Features
+## Performance Notes
 
-### 👥 User Side
+- Uses the `cacheComponents` opt-in feature in Next.js 16.
+- `cacheComponents: true` is enabled in [next.config.ts](C:/Users/Admin/Documents/projects/perfect-fit/next.config.ts:4).
+- Cached query paths also use the `"use cache"` directive in server-side data fetching code.
 
-- **Homepage**  
-  Hero banner, Why Choose Us section, Category grid, Tailor introductions (static), Latest Products, and Customer reviews (static).
+## App Areas
 
-- **Dresses Page**
+### Customer experience
 
-  - Filter by category
-  - Sort by newest, price, or alphabetically
-  - Search dresses by name
+- Home page with hero content, categories, latest arrivals, reviews, and promotional sections.
+- Dresses listing page with search, sorting, and category-based browsing.
+- Product detail pages with dress customization options.
+- Custom dress builder flow.
+- Cart, wishlist, checkout, and order history pages.
+- Authentication and protected account flows.
 
-- **Product Page (Customize Page)**
+### Admin experience
 
-  - Choose: bodice design, skirt type, sleeve style (or leave default)
-  - Add body measurements (length, sleeve length, waist)
-  - Special instructions text area
-  - Add to cart with all customization data
+- Dashboard layout for store management.
+- Product create, update, soft delete, restore, and status management.
+- Category create, update, and delete flows.
+- Customer and order management pages.
+- Admin route protection based on user role.
 
-- **Custom Dress Builder**
+## Project Structure
 
-  - Select design components
-  - Live preview updates with selections
-  - Input measurements and submit custom design to cart
+```text
+src/
+  app/          App Router pages, layouts, API routes, and admin UI
+  actions/      Server actions for products, cart, orders, wishlist, and categories
+  components/   Shared UI components
+  lib/          Auth, database, services, and utilities
+  models/       Database models
+  stores/       Client state stores
+  types/        Shared TypeScript types
+```
 
-- **Cart Page**
+## Getting Started
 
-  - View items with customizations
-  - Edit quantity and view price summary
-  - Checkout button
+### Prerequisites
 
-- **Checkout Page**
+- Node.js 20 or newer
+- pnpm
+- MongoDB database
 
-  - Order summary
-  - Provide name, address, phone
-  - Cash on Delivery option
-
-- **My Orders & Order Details**
-  - See order history
-  - Detailed breakdown including all customizations and measurements
-
----
-
-### 🔧 Admin Panel
-
-- **Product Management**
-
-  - Add, edit, or delete products
-  - Image preview before upload
-
-- **Category Management**
-  - Add, edit, or delete categories
-
----
-
-## 💾 Getting Started
+### Installation
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/Rownokzahan/perfect-fit
-
-# 2. Move into the project folder
 cd perfect-fit
-
-# 3. Install dependencies
 pnpm install
+```
 
-# 4. Set environment variables
-# Create a .env.local file with:
-# - MONGODB_URI
-# - MONGODB_DB
-# - BETTER_AUTH_SECRET
-# - BETTER_AUTH_URL
-# - IMGBB_API_KEY
-# - GUEST_SECRET
+### Environment Variables
 
-# 5. Run development server
+Copy the example file and fill in your values.
+
+PowerShell:
+
+```powershell
+Copy-Item .env.example .env.local
+```
+
+macOS/Linux:
+
+```bash
+cp .env.example .env.local
+```
+
+Required variables:
+
+| Variable | Purpose |
+| --- | --- |
+| `MONGODB_URI` | MongoDB connection string |
+| `MONGODB_DB` | MongoDB database name |
+| `BETTER_AUTH_SECRET` | Better Auth secret |
+| `BETTER_AUTH_URL` | Base URL used by Better Auth |
+| `IMGBB_API_KEY` | ImgBB API key for image uploads |
+| `GUEST_SECRET` | Secret used to sign guest identifiers |
+
+### Run the app
+
+```bash
 pnpm dev
 ```
 
----
+The app will be available at `http://localhost:3000`.
 
-## 📸 Screenshots & Demo
+## Available Scripts
 
-Below are some visual previews showcasing key features of **Perfect Fit**:
+```bash
+pnpm dev
+pnpm build
+pnpm start
+pnpm lint
+```
+
+## Authentication and Access Control
+
+- Better Auth powers sign-in and session handling.
+- Checkout and order pages require authentication.
+- Admin routes are protected and require a user with the `admin` role.
+- Guest users can still build carts before signing in.
+
+## Screenshots
 
 ### Homepage
 
@@ -112,35 +139,25 @@ Below are some visual previews showcasing key features of **Perfect Fit**:
 
 ### Custom Dress Builder
 
-![Custom Dress Builder](https://perfect-fit-store.vercel.app/screenshots/custom-dress.webp)  
-Interactive live preview updates in real-time as users customize bodice, skirt, and sleeve designs.
+![Custom Dress Builder](https://perfect-fit-store.vercel.app/screenshots/custom-dress.webp)
 
-### Admin Panel - Product Management
+### Admin Product Management
 
-![Admin Product Management](https://perfect-fit-store.vercel.app/screenshots/admin-products.webp)  
-Streamlined interface for adding, editing, and managing dress products with image previews.
+![Admin Product Management](https://perfect-fit-store.vercel.app/screenshots/admin-products.webp)
 
-### Admin Panel - Category Management
+### Admin Category Management
 
-![Admin Category Management](https://perfect-fit-store.vercel.app/screenshots/admin-categories.webp)  
-Easy-to-use category creation and management for organizing dress collections.
+![Admin Category Management](https://perfect-fit-store.vercel.app/screenshots/admin-categories.webp)
 
----
+## Deployment
 
-## 📦 Deployment
+The production site is deployed on Vercel:
 
-Deployed on **[Vercel](https://vercel.com/)**:  
-👉 [https://perfect-fit-store.vercel.app](https://perfect-fit-store.vercel.app)
+<https://perfect-fit-store.vercel.app/>
 
----
+## Author
 
-## 🧑‍💻 Author
+Rownok Zahan
 
-**Rownok Zahan**  
-[GitHub](https://github.com/Rownokzahan) | [LinkedIn](https://www.linkedin.com/in/rownok-zahan-rupa/)
-
----
-
-## 📜 License
-
-This project is licensed under the [MIT License](LICENSE).
+- GitHub: <https://github.com/Rownokzahan>
+- LinkedIn: <https://www.linkedin.com/in/rownok-zahan-rupa/>
