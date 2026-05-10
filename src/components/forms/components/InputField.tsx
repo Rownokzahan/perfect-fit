@@ -1,7 +1,7 @@
 import { floatingInputClass, floatingLabelClass } from "@/styles/formStyles";
 import clsx from "clsx";
 import { useState } from "react";
-import { FieldError } from "react-hook-form";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { PiEye, PiEyeClosed } from "react-icons/pi";
 
@@ -9,8 +9,7 @@ interface InputFieldProps {
   id: string;
   label: string;
   type: "text" | "email" | "password" | "number" | "tel";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  registerProps: any;
+  registerProps: UseFormRegisterReturn;
   error?: FieldError;
   isTextArea?: boolean;
 }
@@ -41,7 +40,6 @@ const InputField = ({
       {isTextArea ? (
         <textarea
           id={id}
-          name={id}
           placeholder={label}
           autoComplete="off"
           {...registerProps}
