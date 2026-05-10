@@ -1,6 +1,6 @@
 import { floatingInputClass } from "@/styles/formStyles";
 import clsx from "clsx";
-import { Controller, FieldError } from "react-hook-form";
+import { Control, Controller, FieldError } from "react-hook-form";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import CategoryOptions from "./CategoryOptions";
 import { Category } from "@/types/category";
@@ -8,7 +8,7 @@ import { Category } from "@/types/category";
 interface ProductCategorySelectProps {
   categories: Category[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control: any;
+  control: Control<any>;
   error?: FieldError;
 }
 

@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FieldError } from "react-hook-form";
+import { FieldError, UseFormRegister } from "react-hook-form";
 import { LuImagePlus } from "react-icons/lu";
 
 interface ImageFieldProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register: any;
+  register: UseFormRegister<any>;
   error?: FieldError;
   watchImage?: FileList | string;
   defaultImageUrl?: string;
@@ -19,7 +19,7 @@ const ImageField = ({
   defaultImageUrl,
 }: ImageFieldProps) => {
   const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(
-    defaultImageUrl ?? null
+    defaultImageUrl ?? null,
   );
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const ImageField = ({
     if (watchImage && typeof watchImage !== "string" && watchImage.length > 0) {
       const objectURL = URL.createObjectURL(watchImage[0]);
 
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPreviewImageUrl((prevUrl) => {
         if (prevUrl !== objectURL) {
           if (prevUrl) URL.revokeObjectURL(prevUrl);
@@ -56,13 +57,13 @@ const ImageField = ({
       <label
         className={clsx(
           "flex-1 h-full border border-dashed rounded cursor-pointer flex justify-center items-center",
-          error && "border-red-600"
+          error && "border-red-600",
         )}
       >
         <div
           className={clsx(
             "text-center text-sm underline underline-offset-4",
-            error && "text-red-600"
+            error && "text-red-600",
           )}
         >
           <LuImagePlus className="text-3xl mx-auto w-max mb-1" />
